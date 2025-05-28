@@ -20,10 +20,14 @@ fi
 if [[ -e /tmp/assets/nginxingress ]]; then
   #Installing Ingress (basic)
   echo installing nginx ingress... >> /tmp/killercoda_setup.log
-  helm upgrade --install ingress-nginx ingress-nginx \
-    --repo https://kubernetes.github.io/ingress-nginx \
+  helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+  helm repo update
+  helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx \
     --namespace ingress-nginx --create-namespace \
-    --set controller.hostNetwork=true
+    --set controller.hostNetwork=true 
+    #--set controller.ingressClassResource.default=true \
+    #--set controller.allowSnippetAnnotations=true \
+    #--set controller.service.type=LoadBalancer \
 fi
 if [[ -e /tmp/assets/minio.7z ]]; then
   #Installing Minio (basic)
