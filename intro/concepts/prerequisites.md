@@ -10,7 +10,7 @@ git checkout killercoda-demo
 As specified in the deployment guide, the following prerequisites are required or recommended to deploy and run EOEPCA building blocks:
 1. **Kubernetes cluster**
 
-   This is already provided by the Killercoda platfor we are runnning the tutorial on.
+   This is already provided by the Killercoda platform we are runnning the tutorial on.
 
 2. **Ingress controller**
 
