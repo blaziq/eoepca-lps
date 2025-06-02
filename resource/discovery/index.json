@@ -4,8 +4,8 @@
   "details": {
     "intro": {
       "text": "01-introduction.md",
-      "foreground": "scripts/intro-foreground.sh",
-      "background": "scripts/intro-background.sh"
+      "foreground": "scripts/intro_foreground.sh",
+      "background": "scripts/intro_background.sh"
     },
     "steps": [
       { "title": "Check Prerequisites", "text": "02-prerequisites.md" },
