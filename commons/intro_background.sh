@@ -32,7 +32,7 @@ if [[ -e /tmp/assets/gomplate.7z ]]; then
   # curl -s -S -L -o /usr/local/bin/gomplate https://github.com/hairyhenderson/gomplate/releases/download/v4.3.0/gomplate_linux-amd64 && chmod +x /usr/local/bin/gomplate
   echo "Installing gomplate..." >> ${LOG}
   mkdir -p /usr/local/bin/ 
-  7z x /tmp/assets/gomplate.7z -o /usr/local/bin/
+  7z x /tmp/assets/gomplate.7z -o/usr/local/bin/
   chmod +x /usr/local/bin/gomplate
 fi
 
@@ -58,7 +58,7 @@ if [[ -e /tmp/assets/minio.7z ]]; then
   MINIO_ROOT_USER=eoepca
   MINIO_ROOT_PASSWORD=eoepcatest
   mkdir -p /usr/local/bin/
-  7z x /tmp/assets/minio.7z -o /usr/local/bin/
+  7z x /tmp/assets/minio.7z -o/usr/local/bin/
   chmod +x /usr/local/bin/mc /usr/local/bin/minio
   mkdir -p ~/minio 
   nohup minio server --quiet ~/minio &> /dev/null &
@@ -81,7 +81,7 @@ fi
 if [[ -e /tmp/assets/ignoreresrequests ]]; then
   ### Avoid applyiing resource limits, otherwise Clarissian will not work as limits are hardcoded in there...
   ### THIS IS JUST FOR DEMO! DO NOT DO THIS PART IN PRODUCTION!
-  echo setting resource limits...  >> ${LOG}
+  echo "Setting resource limits..."  >> ${LOG}
   kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/v3.18.2/deploy/gatekeeper.yaml
   cat <<EOF | kubectl apply -f -
 apiVersion: mutations.gatekeeper.sh/v1
@@ -129,7 +129,8 @@ EOF
 fi
 
 if [[ -e /tmp/assets/pythonvenv ]]; then
-  echo "Enabling python virtual environments..." >> ${LOG}
+  # Enable Pyton virtual environments
+  echo "Enabling Python virtual environments..." >> ${LOG}
   [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
   apt install -y python3.12-venv
 fi
@@ -151,6 +152,7 @@ os.execv(n[0],n)' > /usr/local/bin/docker
 fi
 
 if [[ -e /tmp/assets/xmltools ]]; then
+  # Install XML utils for parsing output from service endpoint
   echo "Installing XML Utils..." >> ${LOG}
   [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
   apt install -y libxml2-utils
