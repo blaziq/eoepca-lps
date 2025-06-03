@@ -1,26 +1,35 @@
-# Check Prerequisites
+### 2. Prerequisites
 
-This tutorial requires the following tools:
+As ususal in this tutorial, we will use the EOEPCA Deployment Guide scripts to help us configuring and deploying our application. 
 
-## Required
+First, we clone it in our environment:
 
-- Docker
-- docker-compose
-- Helm (if using Kubernetes)
-- kubectl (if using Kubernetes)
-
-## Check your setup
-
-```bash
-docker --version
-docker-compose --version
-helm version
-kubectl version --client
 ```
+git clone https://github.com/EOEPCA/deployment-guide
+```{{exec}}
 
-If you get errors, follow the links below to install the tools:
+The Rescource Catalogue deployment scripts are available in the `resource-discovery` directory:
 
-- [Install Docker](https://docs.docker.com/get-docker/)
-- [Install docker-compose](https://docs.docker.com/compose/install/)
-- [Install Helm](https://helm.sh/docs/intro/install/)
-- [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+```
+cd ~/deployment-guide/scripts/resource-discovery
+git checkout killercoda-demo
+```{{exec}}
+
+Next we'll check whether the prerequisites for installing the Resource Discovery building block are met. The Deployment Guide scripts provide a dedicated script for this task:
+
+```
+bash check-prerequisites.sh
+```{{exec}}
+
+Since in our tutorial we are using unencrypted communication and no certficates, we can ignore the message 
+
+> `Cert-Manager is not installed in the cluster.`
+
+<!--
+As specified in the deployment guide, the OGC API Process interface, Calrissian Kubernetes engine, requires the following pre-requisites:
+ - a kubernetes cluster
+ - a Read-Write-Many Storage Class (a pre-requisite for both Zoo and Calrissian)
+ - an S3 object storage
+
+we will check in the next steps the avaliability of these pre-requisites
+-->

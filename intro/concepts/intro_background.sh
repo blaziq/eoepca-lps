@@ -4,7 +4,7 @@ echo setting-up your environment... wait till this setup terminates before start
 if [[ -e /tmp/assets/localdns ]]; then
   #DNS-es for dependencies
   echo "setting local dns..." >> /tmp/killercoda_setup.log
-  WEBSITES="minio.eoepca.local zoo.eoepca.local toil-wes.hpc.local"
+  WEBSITES="eoepca.local minio.eoepca.local minio-console.eoepca.local zoo.eoepca.local toil-wes.hpc.local resource-catalogue.eoepca.local registration-api.eoepca.local datacube-access.eoepca.local workspace-api.eoepca.local app-hub.eoepca.local"
   echo "172.30.1.2 $WEBSITES" >> /etc/hosts
   kubectl get -n kube-system configmap/coredns -o yaml > kc.yml
   sed -i "s|ready|ready\n        hosts {\n          172.30.1.2 $WEBSITES\n          fallthrough\n        }|" kc.yml
@@ -23,7 +23,7 @@ if [[ -e /tmp/assets/nginxingress ]]; then
   helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
   helm repo update
   helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx \
-    --namespace ingress-nginx --create-namespace \
+     --namespace ingress-nginx --create-namespace \
     --set controller.hostNetwork=true 
     #--set controller.ingressClassResource.default=true \
     #--set controller.allowSnippetAnnotations=true \
@@ -101,15 +101,17 @@ spec:
         memory: "0"
 EOF
 fi
+
 if [[ -e /tmp/assets/pythonvenv ]]; then
   echo enabling python virtual environments... >> /tmp/killercoda_setup.log
-  [[ -e /tmp/apt-is-updated ]] || { apt-get update -y; touch /tmp/apt-is-updated; }
-  apt-get install -y python3.12-venv
+  [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
+  apt install -y python3.12-venv
 fi
+
 if [[ -e /tmp/assets/htcondor ]]; then
   echo installing HPC batch system for ubuntu user... >> /tmp/killercoda_setup.log
-  [[ -e /tmp/apt-is-updated ]] || { apt-get update -y; touch /tmp/apt-is-updated; }
-  apt-get install -y minicondor </dev/null
+  [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
+  apt install -y minicondor </dev/null
   #Allow ubuntu user to submit jobs
   usermod -a -G docker ubuntu
   #Mount the local /etc/hosts in docker for the DNS resolution
@@ -121,5 +123,12 @@ if "run" in n: n.insert(n.index("run")+1,"-v=/etc/hosts:/etc/hosts:ro")
 os.execv(n[0],n)' > /usr/local/bin/docker
   chmod +x /usr/local/bin/docker
 fi
+
+if [[ -e /tmp/assets/xmltools ]]; then
+  echo "Installing XML tools..." >> /tmp/killercoda_setup.log
+  [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
+  apt install -y libxml2-utils
+fi
+
 #Stop the foreground script (we may finish our script before tail starts in the foreground, so we need to wait for it to start if it does not exist)
 while ! killall tail; do sleep 1; done

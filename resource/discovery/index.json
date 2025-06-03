@@ -1,6 +1,6 @@
 {
   "title": "EOEPCA Resource Discovery",
-  "description": "Discover EO data using the EOEPCA Resource Catalogue and the STAC API.",
+  "description": "Discover EO data using the EOEPCA Resource Discovery and the STAC API.",
   "details": {
     "intro": {
       "text": "01-introduction.md",
@@ -9,15 +9,16 @@
     },
     "steps": [
       { "title": "Check Prerequisites", "text": "02-prerequisites.md" },
-      { "title": "Deploy Resource Catalogue", "text": "03-deploy.md" },
-      { "title": "Add STAC Metadata", "text": "04-add-stac.md" },
-      { "title": "Query the Catalogue", "text": "05-query.md" },
-      { "title": "Explore via Swagger UI", "text": "06-swagger.md" },
-      { "title": "Clean Up", "text": "07-cleanup.md" }
+      { "title": "Configure Resource Discovery", "text": "03-configure.md" },
+      { "title": "Deploy Resource Catalogue", "text": "04-deploy.md" },
+      { "title": "Add STAC Metadata", "text": "05-add-stac.md" },
+      { "title": "Query the Catalogue", "text": "06-query.md" },
+      { "title": "Explore via Swagger UI", "text": "07-swagger.md" },
+      { "title": "Clean Up", "text": "08-cleanup.md" }
     ],
 		"finish": {
 			"title": "Finish",
-			"text": "08-finish.md"
+			"text": "09-finish.md"
 		},
     "assets": {
       "host01": [
