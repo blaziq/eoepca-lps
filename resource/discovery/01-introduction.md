@@ -1,6 +1,3 @@
-
-## 1. Introduction
-
 Welcome to the **[EOEPCA Resource Discovery](https://eoepca.readthedocs.io/projects/resource-discovery/en/latest/)** Building Block tutorial!
 
 The Resource Catalogue plays a key role in enabling users and services to search, discover, and access data assets using standard web APIs.

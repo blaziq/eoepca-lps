@@ -1,8 +1,6 @@
-### 4. Deployment
-
 We can now deploy the Resouce Discovery building block. 
 
-First must add the software helm repository
+First must add the software helm repository.
 
 ```
 helm repo add eoepca https://eoepca.github.io/helm-charts
@@ -17,18 +15,21 @@ helm repo update eoepca-dev
 helm upgrade -i resource-discovery eoepca-dev/rm-resource-catalogue \
   --values generated-values.yaml \
   --version 2.0.0-rc1 \
-  --namespace resource-discovery \
+  --namespace rm \
   --create-namespace
 ```{{exec}}
 
+<!-- 
+  --namespace resource-discovery \
+-->
 
-Now we wait for the Resource Discovery pods to start. To automatically wait for all service to be ready you can run:
+Now we wait for the Resource Discovery pods to start. This may take some time, expecially in this demo environment. To automatically wait for all service to be ready you can run:
 
 ```
 kubectl --namespace resource-discovery wait pod --all --timeout=10m --for=condition=Ready
 ```{{exec}}
 
-We must also create ingress for our newly created Resource Discovery service to make it available. We use the configuration file generated automatically in the previous step.
+Finally, we must create ingress for our newly created Resource Discovery service to make it available. We use the configuration file generated automatically in the previous step.
 
 ```
 kubectl apply -f generated-ingress.yaml

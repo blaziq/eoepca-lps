@@ -1,5 +1,3 @@
-### 3. Configure
-
 Before proceeding with the Resouce Discovery building block deployment, we need first to configure it. We can do it with the configuration script `configure-resource-discovery.sh` provided in the EOEPCA dployment guide.
 
 ```

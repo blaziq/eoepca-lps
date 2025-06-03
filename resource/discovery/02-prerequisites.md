@@ -1,5 +1,3 @@
-### 2. Prerequisites
-
 As ususal in this tutorial, we will use the EOEPCA Deployment Guide scripts to help us configuring and deploying our application. 
 
 First, we clone it in our environment:
