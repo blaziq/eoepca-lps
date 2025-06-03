@@ -12,10 +12,7 @@ if [[ -e /tmp/assets/localdns ]]; then
   IP=`hostname -I | cut -f1 -d' '`
   DOMAIN="eoepca.local"
   SERVICES="minio minio-console zoo resource-discovery registration-api"
-  WEBSITES="${DOMAIN} toil-wes.hpc.local"
-  for S in ${SERVICE}; do
-    WEBSITES="${WEBSITES} ${S}.${DOMAIN} "
-  done
+  WEBSITES="${DOMAIN} toil-wes.hpc.local `echo ${SERVICES} | sed -e "s/ \|$/.${DOMAIN} /g"`"
   echo "${IP} ${WEBSITES}" >> /etc/hosts
 
   # Update CoreDNS config map in Kubernetes
