@@ -4,45 +4,13 @@ Before proceeding with the Resouce Discovery building block deployment, we need 
 bash configure-resource-discovery.sh
 ```{{exec}}
 
-The script will start with the general EOEPCA configuration.
-
-For the demo deployment we are not generating certificates, so we will restrict ourselves to the http scheme.
-
-```
-http
-```{{exec}}
-
-We will use the nginx ingress controller in this tutorial.
-
-```
-nginx
-```{{exec}}
-
-As a domain, we use eoepca.local, which is mapped to the local machine in this demo.
-
-```
-eoepca.local
-```{{exec}}
-
-We set our storage class was already setup to 'standard' in the step before, so we do not need to update it,
-
-```
-no
-```{{exec}}
-
-We are not using automatic certificate generation and indeed no certificates at all, so again we answer 'no' to the next question.
-
-```
-no
-```{{exec}}
-
-We now move to the Processing Building Block specific configuration. We do not need to update domain and storage class, as we can use the standard ones.
-
+The script will start with the general EOEPCA configuration and move on sto the now the Resource Discovery building block specific configuration. We do not need to update domain and storage class, we will use what's already set:
 ```
 no
 no
 ```{{exec}}
 
+There is currently a bug in the deployment configuration. Because of that we must replace a value in the generated config. This will not be necessary in the final version of EOEPCA, once the bug gets fixed.
 ```
 sed -i -e 's/volume_storage_type/volume_storageclass/' generated-values.yaml
 ```{{exec}}
