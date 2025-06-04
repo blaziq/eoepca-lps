@@ -42,3 +42,7 @@ We now move to the Processing Building Block specific configuration. We do not n
 no
 no
 ```{{exec}}
+
+```
+sed -i -e 's/volume_storage_type/volume_storageclass/' generated-values.yaml
+```{{exec}}

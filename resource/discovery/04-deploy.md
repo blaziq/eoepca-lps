@@ -17,7 +17,8 @@ helm upgrade -i resource-discovery eoepca-dev/rm-resource-catalogue \
   --version 2.0.0-rc1 \
   --namespace resource-discovery \
   --create-namespace
-```{{exec}}
+```{{exec}} 
+
 
 Now we wait for the Resource Discovery pods to start. This may take some time, expecially in this demo environment. To automatically wait for all service to be ready you can run:
 
@@ -50,4 +51,5 @@ We can also check manually:
   ```{{exec}}
 - STAC API
   ```
-  curl "https://resource-catalogue.eoepca.local/stac" | jq
+  curl "http://resource-catalogue.eoepca.local/stac" | jq
+  ```{{exec}}
