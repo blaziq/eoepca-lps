@@ -24,23 +24,24 @@ This will ask a few questions about the Kubernetes cluster configuration and che
 First we tell it to use nginx ingress:
 ```
 nginx
-```
-{{exec}}
+```{{exec}}
 
 and the `http` scheme since we are not using certificates for our tutorial:
 ```
 http
-```
-{{exec}}
+```{{exec}}
 
 We enter the top-level domain for our EOEPCA services:
 ```
 eoepca.local
+```{{exec}}
+
+We choose the `standard` storage class which is already present in our Kubernetes cluster:
 ```
-{{exec}}
+standard
+```{{exec}}
 
-Since in our tutorial we are using unencrypted communication and no certficates, we can ignore the message 
-
+Now, since in our tutorial we are using unencrypted communication and no certficates, we can ignore the message 
 > `Cert-Manager is not installed in the cluster.`
 
 
