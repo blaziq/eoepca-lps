@@ -14,12 +14,14 @@ git checkout killercoda-demo
 ```{{exec}}
 
 Next we'll check whether the prerequisites for installing the Resource Discovery building block are met. The Deployment Guide scripts provide a dedicated script for this task:
+
 ```
 bash check-prerequisites.sh
 ```{{exec}}
 
-Since un our tutorial we are using unencrypted communication, we can ignore the message 
-> Cert-Manager is not installed in the cluster.
+Since in our tutorial we are using unencrypted communication and no certficates, we can ignore the message 
+
+> `Cert-Manager is not installed in the cluster.`
 
 <!--
 As specified in the deployment guide, the OGC API Process interface, Calrissian Kubernetes engine, requires the following pre-requisites:

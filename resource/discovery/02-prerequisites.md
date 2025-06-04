@@ -19,11 +19,34 @@ Next we'll check whether the prerequisites for installing the Resource Discovery
 bash check-prerequisites.sh
 ```{{exec}}
 
+This will ask a few questions about the Kubernetes cluster configuration and check if all the necessary prerequirements are installed. 
+
+First we tell it to use nginx ingress:
+```
+nginx
+```
+{{exec}}
+
+and the `http` scheme since we are not using certificates for our tutorial:
+```
+http
+```
+{{exec}}
+
+We enter the top-level domain for our EOEPCA services:
+```
+eoepca.local
+```
+{{exec}}
+
 Since in our tutorial we are using unencrypted communication and no certficates, we can ignore the message 
 
 > `Cert-Manager is not installed in the cluster.`
 
+
 <!--
+A kubernetes cluster, with some minimal constraints, such as the availability of an ingress controller to expose the EOEPCA building block interfaces, DNS entries to map the EOEPCA interface endpoints and certificates to provide SSL support is required by EOEPCA components.
+
 As specified in the deployment guide, the OGC API Process interface, Calrissian Kubernetes engine, requires the following pre-requisites:
  - a kubernetes cluster
  - a Read-Write-Many Storage Class (a pre-requisite for both Zoo and Calrissian)

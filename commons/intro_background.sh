@@ -11,7 +11,7 @@ if [[ -e /tmp/assets/localdns ]]; then
   # Set local hosts file
   IP=`hostname -I | cut -f1 -d' '`
   DOMAIN="eoepca.local"
-  SERVICES="minio minio-console zoo resource-catalogue registration-api"
+  SERVICES="minio minio-console zoo resource-catalogue registration-api eoapi eoapisupport maps datacube-access workspace-api app-hub"
   WEBSITES="${DOMAIN} toil-wes.hpc.local `echo ${SERVICES} | sed -e "s/ \|$/.${DOMAIN} /g"`"
   echo "${IP} ${WEBSITES}" >> /etc/hosts
 
