@@ -4,7 +4,8 @@ Let’s register a sample dataset in the Resource Catalogue.
 
 ## 1. Create a file named `item.json`:
 
-```json
+```
+cat <<EOF > item.json
 {
   "type": "Feature",
   "stac_version": "1.0.0",
@@ -20,12 +21,13 @@ Let’s register a sample dataset in the Resource Catalogue.
   "assets": {},
   "collection": "demo-collection"
 }
-```
+EOF 
+```{{exec}}
 
 ## 2. Ingest the item
 
-```bash
-curl -X POST http://localhost:8082/stac/collections/demo-collection/items \
+```
+curl -X POST http://resource-catalogue.eoepca.local/stac/collections/demo-collection/items \
   -H "Content-Type: application/json" \
   -d @item.json
-```
+```{{exec}}
