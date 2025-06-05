@@ -21,7 +21,8 @@ cat <<EOF > item.json
   "assets": {},
   "collection": "demo-collection"
 }
-EOF 
+EOF
+
 ```{{exec}}
 
 ## 2. Ingest the item
