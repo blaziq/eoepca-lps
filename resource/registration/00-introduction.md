@@ -27,7 +27,7 @@ The Resource Registration BB comprises three main components:
 
 ---
 
-### What Uou'll Learn
+### What You'll Learn
 - Deploy Resource Registration Building Block on Kubernetes
 - Validate and test the deployment
 - Register a STAC-compliant collection into the catalogue
