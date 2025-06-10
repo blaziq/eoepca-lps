@@ -43,13 +43,13 @@ bash validation.sh
 We can also check manually:
 - the endpoints provided by the Resource Discovery service
   ```
-  curl http://resource-catalogue.eoepca.local | jq
+  curl -s "http://resource-catalogue.eoepca.local" | jq
   ```{{exec}}
 - the capabilities containing service metadata in XML format
   ```
-  curl "http://resource-catalogue.eoepca.local/csw?service=CSW&version=2.0.2&request=GetCapabilities" | xmllint --format -
+  curl -s "http://resource-catalogue.eoepca.local/csw?service=CSW&version=2.0.2&request=GetCapabilities" | xmllint --format -
   ```{{exec}}
 - STAC API
   ```
-  curl "http://resource-catalogue.eoepca.local/stac" | jq
+  curl -s "http://resource-catalogue.eoepca.local/stac" | jq
   ```{{exec}}

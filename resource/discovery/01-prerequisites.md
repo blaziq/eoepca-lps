@@ -10,7 +10,6 @@ The Rescource Catalogue deployment scripts are available in the `resource-discov
 
 ```
 cd ~/deployment-guide/scripts/resource-discovery
-git checkout killercoda-demo
 ```{{exec}}
 
 Next we'll check whether the prerequisites for installing the Resource Discovery building block are met. The Deployment Guide scripts provide a dedicated script for this task:
@@ -21,14 +20,14 @@ bash check-prerequisites.sh
 
 This will ask a few questions about the Kubernetes cluster configuration and check if all the necessary prerequirements are installed. 
 
-First we tell it to use nginx ingress:
-```
-nginx
-```{{exec}}
-
-and the `http` scheme since we are not using certificates for our tutorial:
+First, we choose th `http` scheme since we are not using certificates and encryption for our tutorial:
 ```
 http
+```{{exec}}
+
+We choose the nginx ingress controller:
+```
+nginx
 ```{{exec}}
 
 We enter the top-level domain for our EOEPCA services:
