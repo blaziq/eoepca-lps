@@ -32,10 +32,6 @@
       { 
         "title": "Explore via Swagger UI", 
         "text": "06-swagger.md" 
-      },
-      { 
-        "title": "Clean Up", 
-        "text": "07-cleanup.md" 
       }
     ],
 		"finish": {
