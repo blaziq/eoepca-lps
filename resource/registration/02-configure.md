@@ -43,6 +43,7 @@ no
 no
 ```{{exec}}
 
+There is currently a bug in the deployment configuration 
 ```
 sed -i -e 's/volume_storage_type/volume_storageclass/' generated-values.yaml
 ```{{exec}}

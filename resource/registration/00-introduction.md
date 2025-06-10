@@ -14,10 +14,15 @@ The Resource Registration Building Block manages resource ingestion into the pla
 
 The Resource Registration BB comprises three main components:
 1. Registration API
+   
    An OGC API Processes interface for registering, updating, or deleting resources on the local platform.
+
 2. Harvester
+   
    Automates workflows to harvest data from external sources and register them in the platform.
+
 3. Common Registration Library
+   
    A Python library consolidating packages for business logic in workflows and resource handling.
 
 ---
