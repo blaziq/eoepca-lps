@@ -1,6 +1,6 @@
 {
-  "title": "EOEPCA Resource Discovery",
-  "description": "Discover EO data using the EOEPCA Resource Discovery and the STAC API.",
+  "title": "EOEPCA Data Access",
+  "description": "Access geospatial data assets stored in the platform",
   "details": {
     "intro": {
       "text": "00-introduction.md",
