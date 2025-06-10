@@ -32,7 +32,7 @@
       { 
         "title": "Validating Registration", 
         "text": "06-validate.md" 
-      },
+      }
     ],
 		"finish": {
 			"title": "Finish",
@@ -40,7 +40,10 @@
 		},
     "assets": {
       "host01": [
-        {"file": "*", "target": "/tmp/assets"}
+        {
+          "file": "*", 
+          "target": "/tmp/assets"
+        }
       ]
     }
   },
