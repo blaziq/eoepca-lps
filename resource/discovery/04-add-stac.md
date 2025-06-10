@@ -143,8 +143,8 @@ cat <<EOF > item.json
   "properties": {
     "datetime": "2023-12-01T00:00:00Z"
   },
-    "type": "Point",
   "geometry": {
+    "type": "Point",
     "coordinates": [10.0, 45.0]
   },
   "links": [],
