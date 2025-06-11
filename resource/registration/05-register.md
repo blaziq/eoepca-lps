@@ -23,3 +23,71 @@ curl -s http://registration-api.eoepca.local/jobs | jq
 curl -s http://resource-catalogue.eoepca.local/collections/metadata:main/items/S2MSI2A
 ```{{exec}}
 
+
+source ~/.eoepca/state
+
+curl -s -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} http://registration-harvester-api.eoepca.local/flowable-rest/service/repository/deployments | jq
+
+files=(
+  "https://raw.githubusercontent.com/EOEPCA/registration-harvester/refs/heads/main/workflows/landsat.bpmn"
+  "https://raw.githubusercontent.com/EOEPCA/registration-harvester/refs/heads/main/workflows/landsat-scene-ingestion.bpmn"
+)
+
+for url in "${files[@]}"; do
+  filename=$(basename "$url")
+  curl -s -O "$url" # pobierz plik
+  curl -s -X POST -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} "http://registration-harvester-api.eoepca.local/flowable-rest/service/repository/deployments" \
+    -F "file=@$filename" | jq
+done
+
+
+```
+curl -s -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} "http://registration-harvester-api.eoepca.local/flowable-rest/service/repository/process-definitions" | jq
+```{{exec}}
+
+```
+PROCESS=$(curl -s -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} "http://registration-harvester-api.eoepca.local/flowable-rest/service/repository/process-definitions" | jq -r '[.data.[] | select (.key=="landsatRegistration")] | max_by(.version) | .id ')
+echo $PROCESS
+```{{exec}}
+
+```
+PAYLOAD=$(cat <<EOF
+{
+  "processDefinitionId": "${PROCESS}",
+  "variables": [
+    {
+      "name": "datetime_interval",
+      "type": "string",
+      "value": "2024-11-12T15:00:00.000000Z/2024-11-12T16:00:00.000000Z"
+    },
+    {
+      "name": "collections",
+      "type": "string",
+      "value": "landsat-c2l2-sr"
+    },
+    {
+      "name": "bbox",
+      "type": "string",
+      "value": "8,40,18,60"
+    },
+    {
+      "name": "query",
+      "type": "string",
+      "value": "{\"created\": {\"gte\": \"2024-12-13T15:00:00.000000Z\", \"lt\": \"2024-12-13T16:00:00.000000Z\"}}"
+    }
+  ]
+}
+EOF
+)
+```{{exec}}
+
+```
+curl -s -X POST -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} http://registration-harvester-api.eoepca.local/flowable-rest/service/runtime/process-instances \
+  -H "Content-Type: application/json" \
+  -d "${PAYLOAD]"| jq
+```{{exec}}  
+  
+```  
+curl -s -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} http://registration-harvester-api.eoepca.local/flowable-rest/service/runtime/process-instances | jq
+```{{exec}}
+
