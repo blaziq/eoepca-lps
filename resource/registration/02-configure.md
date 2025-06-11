@@ -22,3 +22,9 @@ Let's check if our values have been applied correctly in the configuration file:
 ```
 cat ~/.eoepca/state
 ```{{exec}}
+
+Finally, we create secrets in Kubernetes for the Harvester API:
+```
+bash apply-secrets.sh
+kubectl -n resource-registration get secrets
+```{{exec}}
