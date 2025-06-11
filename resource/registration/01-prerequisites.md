@@ -44,3 +44,10 @@ no
 
 Now, since in our tutorial we decided not to use certficates, we can ignore the message:
 > `Cert-Manager is not installed in the cluster.`
+
+As an extra prerequisite, we are going to install the Resource Discovery Building Block. Resource Registration is closely integrated and cooperates with it, and we will use it later on during our tutorial..
+
+There is a prepared script which will deploy the Resource Discovery Building Block automatically. If you are interested in details about the deployment, please check our tutorial on Resource Discovery.
+```
+bash /tmp/assets/deploy-resource-discovery.sh
+```{{exec}}

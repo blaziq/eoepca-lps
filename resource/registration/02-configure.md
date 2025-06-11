@@ -1,4 +1,4 @@
-Before proceeding with the Resouce Discovery building block deployment, we need first to configure it. We can do it with the configuration script `configure-resource-discovery.sh` provided in the EOEPCA dployment guide.
+Before proceeding with the Resouce Registration building block deployment, we need first to configure it. We can do it with the configuration script `configure-resource-registration.sh` provided in the EOEPCA dployment guide.
 
 ```
 bash configure-resource-registration.sh
@@ -43,7 +43,10 @@ no
 no
 ```{{exec}}
 
-There is currently a bug in the deployment configuration 
 ```
-sed -i -e 's/volume_storage_type/volume_storageclass/' generated-values.yaml
+bash apply-secrets.sh
+```{{exec}}
+
+```
+kubectl -n resource-registration get secrets
 ```{{exec}}
