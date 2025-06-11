@@ -28,7 +28,7 @@
       { 
         "title": "Query the Catalogue", 
         "text": "05-query.md" 
-      },
+      }
     ],
 		"finish": {
 			"title": "Finish",
