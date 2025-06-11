@@ -6,47 +6,14 @@ bash configure-resource-registration.sh
 
 The script will start with the general EOEPCA configuration.
 
-For the demo deployment we are not generating certificates, so we will restrict ourselves to the http scheme.
-
-```
-http
-```{{exec}}
-
-We will use the nginx ingress controller in this tutorial.
-
-```
-nginx
-```{{exec}}
-
-As a domain, we use eoepca.local, which is mapped to the local machine in this demo.
-
-```
-eoepca.local
-```{{exec}}
-
-We set our storage class was already setup to 'standard' in the step before, so we do not need to update it,
-
-```
-no
-```{{exec}}
-
-We are not using automatic certificate generation and indeed no certificates at all, so again we answer 'no' to the next question.
-
-```
-no
-```{{exec}}
-
-We now move to the Processing Building Block specific configuration. We do not need to update domain and storage class, as we can use the standard ones.
-
+We have already set the ingress host (top level domain for our services) and the storage class, so we answer `no` to both questions
 ```
 no
 no
 ```{{exec}}
 
+We set our Flowable credentials to `eoepca/eoepca`:
 ```
-bash apply-secrets.sh
-```{{exec}}
-
-```
-kubectl -n resource-registration get secrets
+eoepca
+eoepca
 ```{{exec}}

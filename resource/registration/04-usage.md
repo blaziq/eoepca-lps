@@ -1,31 +1,33 @@
-# Add STAC Metadata
+Synchronous Execution of Hello-World Process
 
-Let’s register a sample dataset in the Resource Catalogue.
-
-## 1. Create a file named `item.json`:
-
-```json
-{
-  "type": "Feature",
-  "stac_version": "1.0.0",
-  "id": "sample-dataset",
-  "properties": {
-    "datetime": "2023-12-01T00:00:00Z"
-  },
-  "geometry": {
-    "type": "Point",
-    "coordinates": [10.0, 45.0]
-  },
-  "links": [],
-  "assets": {},
-  "collection": "demo-collection"
-}
 ```
+source ~/.eoepca/state
+curl -s -X POST "http://registration-api.eoepca.local/processes/hello-world/execution" \
+-H "Content-Type: application/json" \
+-d '{
+   "inputs": {
+      "name": "Resource Registration Validation Tester",
+      "message": "This confirms that the Registration API is working correctly."
+   }
+}' | jq
+``` {{exec}}
 
-## 2. Ingest the item
 
-```bash
-curl -X POST http://localhost:8082/stac/collections/demo-collection/items \
-  -H "Content-Type: application/json" \
-  -d @item.json
+Asynchronous Execution of Hello-World Process
+
 ```
+source ~/.eoepca/state
+curl -s -X POST "http://registration-api.eoepca.local/processes/hello-world/execution" \
+-H "Content-Type: application/json" \
+-H "Prefer": "respond-async" \
+-d '{
+   "inputs": {
+      "name": "Resource Registration Validation Tester",
+      "message": "This confirms that the Registration API is working correctly."
+   }
+}' | jq
+``` {{exec}}
+
+Check Status of Async Job
+
+
