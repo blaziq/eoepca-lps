@@ -1,15 +1,20 @@
-# Query the Catalogue
-
-Run a STAC query to retrieve your dataset:
-
-```bash
-curl -X POST http://localhost:8082/stac/search \
+```
+curl -s -X POST "http://registration-api.eoepca.local/processes/register/execution" \
   -H "Content-Type: application/json" \
   -d '{
-    "bbox": [9.0, 44.0, 11.0, 46.0],
-    "datetime": "2023-01-01T00:00:00Z/2023-12-31T23:59:59Z",
-    "collections": ["demo-collection"]
-  }'
-```
+    "inputs": {
+        "type": "collection",
+        "source": {"rel": "collection", "href": "https://raw.githubusercontent.com/james-hinton/temp-data-store/refs/heads/main/stac-collection.json"},
+        "target": {"rel": "https://api.stacspec.org/v1.0.0/core", "href": "http://resource-catalogue.eoepca.local/stac"}
+    }
+  }' | jq
+```{{exec}}
 
-Expected: the response includes your previously ingested item.
+```
+curl -s http://registration-api.eoepca.local/jobs
+``` {{exec}}
+
+```
+curl -s http://resource-catalogue.eoepca.local/collections/metadata:main/items/S2MSI2A
+```{{exec}}
+
