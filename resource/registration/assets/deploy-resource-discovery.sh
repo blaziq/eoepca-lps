@@ -24,14 +24,18 @@ helm upgrade -i resource-discovery eoepca-dev/rm-resource-catalogue \
   --namespace resource-discovery \
   --create-namespace
 
-echo "--- Waiting for Resouce Discovery pods to be ready"
+echo "--- Waiting for Resource Discovery pods to be ready"
 kubectl --namespace resource-discovery wait pod --all --timeout=10m --for=condition=Ready
 
-echo "--- Applying ingress"
+echo "--- Applying ingress rules"
 kubectl apply -f generated-ingress.yaml
 
-sleep 30
+echo "--- Waiting for Resource Discovery pod with label 'io.kompose.service=pycsw'"
+kubectl --namespace resource-discovery wait pod -l io.kompose.service=pycsw --for=condition=Ready --timeout=600s
 
 echo "--- Validating deployment"
 bash validation.sh
 popd
+
+kubectl --namespace resource-discovery wait pod -l io.kompose.service=pycsw --for=condition=Ready --timeout=600s
+
