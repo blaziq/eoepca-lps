@@ -17,3 +17,8 @@ We set our Flowable credentials to `eoepca/eoepca`:
 eoepca
 eoepca
 ```{{exec}}
+
+Let's check if our values have been applied correctly in the configuration file:
+```
+cat ~/.eoepca/state
+```{{exec}}
