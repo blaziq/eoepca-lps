@@ -32,9 +32,9 @@ We enter the top-level domain for our EOEPCA services:
 eoepca.local
 ```{{exec}}
 
-The storage class is already configured in our Kubernetes cluster and selected as default for our EOEPCA deployment, we don't want to change it:
+We choose our storage class for persistent volumes:
 ```
-no
+standard
 ```{{exec}}
 
 We also do not need automatically generated certificates or indeed any certificates at all for our tutorial:
