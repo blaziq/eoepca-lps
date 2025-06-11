@@ -18,6 +18,7 @@ We can verify the status of the registration job
 curl -s http://registration-api.eoepca.local/jobs | jq
 ```{{exec}}
 
+
 ```
 curl -s http://resource-catalogue.eoepca.local/collections/metadata:main/items/S2MSI2A
 ```{{exec}}

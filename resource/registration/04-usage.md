@@ -38,7 +38,7 @@ Now we check the status of our asynchronous job. Since we executed a process tha
 curl -s ${ASYNC_JOB} | jq
 ```{{exec}}
 
-We can see that the job completed (`"message": "job complete") successfully ("status": "succesful"). We also see links to results in the HTML and JSON formats. Let's check what the results JSON look like:
+We can see that the job completed `("message": "job complete")` successfully `("status": "succesful")`. We also see links to results in the HTML and JSON formats. Let's check what the results JSON look like:
 ```
 curl -s ${ASYNC_JOB}/results?f=json  | jq
 ```{{exec}}
