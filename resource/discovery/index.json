@@ -29,10 +29,6 @@
         "title": "Query the Catalogue", 
         "text": "05-query.md" 
       },
-      { 
-        "title": "Explore via Swagger UI", 
-        "text": "06-swagger.md" 
-      }
     ],
 		"finish": {
 			"title": "Finish",
