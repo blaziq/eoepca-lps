@@ -42,8 +42,10 @@ We also do not need automatically generated certificates or indeed any certifica
 no
 ```{{exec}}
 
-Now, since in our tutorial we decided not to use certficates, we can ignore the message:
-> `Cert-Manager is not installed in the cluster.`
+Now, since in our tutorial we do not use certficates, we can ignore the message:
+> Cert-Manager is not installed in the cluster.
+> Please install Cert-Manager: https://cert-manager.io/docs/installation/
+> If you are manually managing certificates, you can ignore this message.
 
 As an extra prerequisite, we are going to install the Resource Discovery Building Block. Resource Registration is closely integrated and cooperates with it, and we will use it later on during our tutorial..
 

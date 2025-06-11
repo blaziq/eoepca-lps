@@ -13,7 +13,7 @@ curl -s -X POST "http://registration-api.eoepca.local/processes/hello-world/exec
 -d '{
    "inputs": {
       "name": "Resource Registration Validation Tester",
-      "message": "This confirms that the Registration API is working correctly."
+      "message": "This confirms that the Registration API is working correctly (synchronous job)."
    }
 }' | jq
 ```{{exec}}
@@ -27,7 +27,7 @@ ASYNC_JOB=$(curl -s -D - -X POST "http://registration-api.eoepca.local/processes
  -d '{
    "inputs": {
       "name": "Resource Registration Validation Tester",
-      "message": "This confirms that the Registration API is working correctly."
+      "message": "This confirms that the Registration API is working correctly (asynchronous job)."
    }
 }'  | awk -F': ' '/^Location:/ {print $2}' | tr -d '\r\n')
 echo ${ASYNC_JOB}
@@ -41,9 +41,8 @@ curl -s ${ASYNC_JOB} | jq
 We can see that the job completed (`"message": "job complete") successfully ("status": "succesful"). We also see links to results in the HTML and JSON formats. Let's check what the results JSON look like:
 ```
 curl -s ${ASYNC_JOB}/results?f=json  | jq
-``` 
+```{{exec}}
 
 The result is indeed the same as with the synchronous execution.
-
 
 

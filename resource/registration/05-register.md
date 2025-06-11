@@ -1,3 +1,6 @@
+Now we are going to register a sample STAC Collection, following the example from the Deployment Guide. 
+
+In order to do that, we execute the process `register`, already existing in the Resource Registration service, with parameters indication collection metadata. A link to the Resource Catalogue where the collection has been registered, is returned in the output.
 ```
 curl -s -X POST "http://registration-api.eoepca.local/processes/register/execution" \
   -H "Content-Type: application/json" \
@@ -10,9 +13,10 @@ curl -s -X POST "http://registration-api.eoepca.local/processes/register/executi
   }' | jq
 ```{{exec}}
 
+We can verify the status of the registration job
 ```
-curl -s http://registration-api.eoepca.local/jobs
-``` {{exec}}
+curl -s http://registration-api.eoepca.local/jobs | jq
+```{{exec}}
 
 ```
 curl -s http://resource-catalogue.eoepca.local/collections/metadata:main/items/S2MSI2A
