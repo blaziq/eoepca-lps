@@ -19,15 +19,19 @@ curl -s http://registration-api.eoepca.local/jobs | jq
 ```{{exec}}
 
 
+We can also see that the collection has been added to the Resource Discovery ie. the catalogue - observe the domain, it's the Resoure Discovery we installed in the beginning as a prerequisite.
 ```
-curl -s http://resource-catalogue.eoepca.local/collections/metadata:main/items/S2MSI2A
+curl -s http://resource-catalogue.eoepca.local/collections/metadata:main/items/S2MSI2A | jq
 ```{{exec}}
 
 
+<!--
+```
 source ~/.eoepca/state
-
 curl -s -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} http://registration-harvester-api.eoepca.local/flowable-rest/service/repository/deployments | jq
+```{{exec}}
 
+```
 files=(
   "https://raw.githubusercontent.com/EOEPCA/registration-harvester/refs/heads/main/workflows/landsat.bpmn"
   "https://raw.githubusercontent.com/EOEPCA/registration-harvester/refs/heads/main/workflows/landsat-scene-ingestion.bpmn"
@@ -39,6 +43,12 @@ for url in "${files[@]}"; do
   curl -s -X POST -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} "http://registration-harvester-api.eoepca.local/flowable-rest/service/repository/deployments" \
     -F "file=@$filename" | jq
 done
+```{{exec}}
+
+
+```
+curl -s -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} http://registration-harvester-api.eoepca.local/flowable-rest/service/repository/deployments | jq
+```{{exec}}
 
 
 ```
@@ -84,10 +94,10 @@ EOF
 ```
 curl -s -X POST -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} http://registration-harvester-api.eoepca.local/flowable-rest/service/runtime/process-instances \
   -H "Content-Type: application/json" \
-  -d "${PAYLOAD]"| jq
+  -d "${PAYLOAD}"| jq
 ```{{exec}}  
   
 ```  
 curl -s -u ${FLOWABLE_ADMIN_USER}:${FLOWABLE_ADMIN_PASSWORD} http://registration-harvester-api.eoepca.local/flowable-rest/service/runtime/process-instances | jq
 ```{{exec}}
-
+-->
