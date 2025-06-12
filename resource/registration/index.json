@@ -28,10 +28,6 @@
       { 
         "title": "Registering Resources", 
         "text": "05-register.md" 
-      },
-      { 
-        "title": "Validating Registration", 
-        "text": "06-validate.md" 
       }
     ],
 		"finish": {
