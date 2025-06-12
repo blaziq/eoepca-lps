@@ -1,9 +1,15 @@
-Welcome to the **[EOEPCA Resource Discovery](https://eoepca.readthedocs.io/projects/resource-discovery/en/latest/)** building block tutorial!
+Welcome to the **[EOEPCA Data Access](https://eoepca.readthedocs.io/projects/data-access/en/latest/)** building block tutorial!
 
-The Resource Discovery serivce plays a key role in enabling users and services to search, discover, and access data assets using standard web APIs.
+The Data Access Building Block provides feature-rich and reliable interfaces to geospatial data assets stored in the EOEPCA platform. It can be accessed and interacted with by both human users and machine interfaces.
 
-In this scenario, you will learn how to deploy and interact with the EOEPCA Resource Discovery — a core component responsible for exposing Earth Observation datasets and services through metadata that complies with the [STAC (SpatioTemporal Asset Catalog)](https://stacspec.org/en) standard.
+In this scenario, you will learn how to deploy and interact with the EOEPCA Data Access
 
+
+<!--
+— a core component responsible for exposing Earth Observation datasets and services through metadata that complies with the [STAC (SpatioTemporal Asset Catalog)](https://stacspec.org/en) standard.
+-->
+
+<!--
 ---
 
 ### What You'll Learn
@@ -29,3 +35,4 @@ This tutorial simulates that workflow end-to-end.
 ---
 
 Let’s begin by making sure all required tools are installed.
+-->

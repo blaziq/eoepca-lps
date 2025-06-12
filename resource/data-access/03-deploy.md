@@ -1,3 +1,47 @@
+```
+helm upgrade -i pgo oci://registry.developers.crunchydata.com/crunchydata/pgo \
+  --version 5.6.0 \
+  --namespace data-access \
+  --create-namespace \
+  --values postgres/generated-values.yaml
+```{{exec}}
+
+```
+helm repo add eoapi https://devseed.com/eoapi-k8s/
+helm repo update eoapi
+helm upgrade -i eoapi eoapi/eoapi \
+  --version 0.6.0 \
+  --namespace data-access \
+  --values eoapi/generated-values.yaml
+```{{exec}}
+
+```
+helm repo add eoepca-dev https://eoepca.github.io/helm-charts-dev
+helm repo update eoepca-dev
+helm upgrade -i stac-manager eoepca-dev/stac-manager \
+  --version 0.0.3 \
+  --namespace data-access \
+  --values stac-manager/generated-values.yaml
+```{{exec}}
+
+```
+helm upgrade -i eoapi-maps-plugin eoepca-dev/eoapi-maps-plugin \
+  --version 0.0.21 \
+  --namespace data-access \
+  --values eoapi-maps-plugin/generated-values.yaml
+```{{exec}}
+
+
+```
+kubectl --namespace data-access wait pod --all --timeout=10m --for=condition=Ready
+```{{exec}}
+
+
+
+
+
+
+<!--
 We can now deploy the Resouce Discovery building block. 
 
 First must add the software helm repository.
@@ -53,3 +97,5 @@ We can also check manually:
   ```
   curl -s "http://resource-catalogue.eoepca.local/stac" | jq
   ```{{exec}}
+-->
+
