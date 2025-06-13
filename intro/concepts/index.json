@@ -4,19 +4,35 @@
   "details": {
     "intro": {
       "title": "Intro",
-      "text": "intro.md",
+      "text": "00-introduction.md",
       "foreground": "intro_foreground.sh",
       "background": "intro_background.sh"
     },
 		"steps": [
       {
-        "title": "Pre-requisites (1/4)",
-        "text": "prerequisites.md"
+        "title": "Prerequisites",
+        "text": "01-prerequisites.md"
+      },
+      {
+        "title": "Storage",
+        "text": "02-storage.md"
+      },
+      {
+        "title": "Ingress",
+        "text": "03-ingress.md"
+      },
+      {
+        "title": "S3 Object Storage",
+        "text": "04-minio.md"
+      },
+      {
+        "title": "Container Registry",
+        "text": "05-harbor.md"
       }
 		],
 		"finish": {
 			"title": "Finish",
-			"text": "finish.md"
+			"text": "99-finish.md"
 		},
     "assets": {
       "host01": [
