@@ -7,7 +7,7 @@ As usual, we will use scripts provided with the EOEPCA Deployment Guide:
 cd ~/deployment-guide/scripts/minio
 ```{{exec}}
 
-First, we check the prerequisites. At this point all of the should be met:
+First, we check the prerequisites. At this point all of them should be met:
 ```
 bash check-prerequisites.sh
 ```{{exec}}
@@ -45,15 +45,20 @@ eoepcatest
 ```{{exec}}
 
 Now we create our access key in MinIO. The variables `MINIO_USER` and `MINIO_PASSWORD` have been set by the script `configure-minio.sh` and the variables `S3_ACCESS_KEY`, `S3_SECRET_KEY` have been set by the script `apply-secrets.sh` in the file `~/.eoepca/state`. 
+Set an alias in `mc` for our MinIO endpoint:
 ```
 source ~/.eoepca/state
 mc alias set minio-local http://minio.eoepca.local/ ${MINIO_USER} ${MINIO_PASSWORD}
+```{{exec}}
+
+Create Access Key:
+```
 mc admin accesskey create minio-local/ user --access-key ${S3_ACCESS_KEY} --secret-key ${S3_SECRET_KEY}
 ```{{exec}}
 
 We can now validate our deployment with the provided script `validate.sh`. This requires `s3cmd` which has been preinstalled:
 ```
-bash validate.sh
+bash validation.sh
 y
 ```{{exec}}
 
