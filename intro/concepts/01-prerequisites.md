@@ -30,7 +30,7 @@ First, we must answer some questions, keeping in mind the configuration we are g
   ```
   yes
   ```{{exec}}
-- Cert Manager cluster issuer for TLS certificates
+- Cert Manager cluster issuer for TLS certificates (this is the name of the ClusterIssuer we will configure later in Cert-Manager)
   ```
   eoepca-ca-clusterissuer
   ```{{exec}}

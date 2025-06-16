@@ -19,12 +19,17 @@ spec:
 EOF
 ```{{exec}}
 
+We wait until our `root-check` pod is ready:
+```
+kubectl wait pod root-check --timeout=10m --for=condition=Ready
+```{{exec}}
+
 We check whether it is running as root:
 ```
 kubectl exec -it root-check -- id -un
 ```{{exec}}
 
-The output is `root` so it is confirmed that our pod is running with root privileges.
+If the output is `root`, it is confirmed that our pod is running with root privileges.
 
 Now we can delete the pod:
 ```

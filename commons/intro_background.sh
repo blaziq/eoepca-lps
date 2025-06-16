@@ -53,15 +53,18 @@ if [[ -e /tmp/assets/minio.7z ]]; then
   # wget -q https://dl.min.io/server/minio/release/linux-amd64/minio -O /usr/local/bin/minio && chmod +x /usr/local/bin/minio
   # wget -q https://dl.min.io/client/mc/release/linux-amd64/mc -O  /usr/local/bin/mc && chmod +x /usr/local/bin/mc
   mkdir -p /usr/local/bin/ && 7z x /tmp/assets/minio.7z -o/usr/local/bin/ && chmod +x /usr/local/bin/mc /usr/local/bin/minio
-  mkdir -p ~/minio && MINIO_ROOT_USER=eoepca MINIO_ROOT_PASSWORD=eoepcatest nohup minio server --quiet ~/minio &>/dev/null &
-  sleep 1
-  while ! mc config host add minio-local http://minio.eoepca.local:9000/ eoepca eoepcatest; do sleep 1; done
-  # mc alias set minio-local http://minio.eoepca.local:9000/ eoepca eoepcatest
-  mc mb minio-local/eoepca
-  mkdir -p ~/.eoepca && echo 'export S3_ENDPOINT="http://minio.eoepca.local:9000/"
+  if [[ ! -e /tmp/assets/minioclientonly ]]; then
+    echo "Setting up local Minio S3 object storage server..." >> ${LOG}  
+    mkdir -p ~/minio && MINIO_ROOT_USER=eoepca MINIO_ROOT_PASSWORD=eoepcatest nohup minio server --quiet ~/minio &>/dev/null &
+    sleep 1
+    while ! mc config host add minio-local http://minio.eoepca.local:9000/ eoepca eoepcatest; do sleep 1; done
+    # mc alias set minio-local http://minio.eoepca.local:9000/ eoepca eoepcatest
+    mc mb minio-local/eoepca
+    mkdir -p ~/.eoepca && echo 'export S3_ENDPOINT="http://minio.eoepca.local:9000/"
 export S3_ACCESS_KEY="eoepca" 
 export S3_SECRET_KEY="eoepcatest"
 export S3_REGION="us-east-1"' >> ~/.eoepca/state
+  fi
 fi
 
 if [[ -e /tmp/assets/readwritemany ]]; then
@@ -149,6 +152,14 @@ if [[ -e /tmp/assets/xmltools ]]; then
   echo "Installing XML Utils..." >> ${LOG}
   [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
   apt install -y libxml2-utils
+fi
+
+if [[ -e /tmp/assets/s3cmd ]]; then
+  # Install XML utils for parsing output from service endpoint
+  echo "Installing s3cmd..." >> ${LOG}
+  [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
+  apt install -y s3cmd
+  echo "check_ssl_certificate = False" >> ~/.s3cfg
 fi
 
 #Stop the foreground script (we may finish our script before tail starts in the foreground, so we need to wait for it to start if it does not exist)

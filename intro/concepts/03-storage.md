@@ -27,7 +27,7 @@ spec:
 EOF
 ```{{exec}}
 
-Check that the PVC created and in the status `Bound`:
+Check that the PVC is created and has the status `Bound`:
 ```
 kubectl get pvc
 ```{{exec}}
