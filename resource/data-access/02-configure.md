@@ -24,7 +24,7 @@ S3_SECRET_KEY is already set to 'eoepcatest'. Do you want to update it
 no
 ```{{exec}}
 
-Finally, we create secrets in Kubernetes 
+Finally, we create a Kubernetes secret with S3 credentials. Also here a script is provided in the Deployment Guide.
 ```
 bash apply-secrets.sh
 kubectl -n data-access get secrets
