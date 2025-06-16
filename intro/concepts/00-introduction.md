@@ -49,4 +49,4 @@ As specified in the Deployment Guide, the following prerequisites are required o
    The Container Registry stores and distributes container images for application development and deployment. EOEPCA uses Harbor, an open-source container registry, to manage images for applications on the platform, including those from the Application Hub or running within the Processing building block.
 
 
-In the following steps we will deploy and configure the services **3, 4, 6, 7, 8** which are not already installed.
+In the following steps we will deploy and configure the components **3, 4, 6, 7, 8** which are required or recommended but not already installed.

@@ -26,7 +26,7 @@ helm repo add minio https://charts.min.io/
 helm repo update minio
 ```{{exec}}
 
-And deploy MinIO in our Kubernetes cluster:
+And deploy MinIO into our Kubernetes cluster:
 ```
 helm upgrade -i minio minio/minio \
   --version 5.4.0 \
@@ -44,7 +44,8 @@ eoepca
 eoepcatest
 ```{{exec}}
 
-Now we create our access key in MinIO. The variables `MINIO_USER` and `MINIO_PASSWORD` have been set by the script `configure-minio.sh` and the variables `S3_ACCESS_KEY`, `S3_SECRET_KEY` have been set by the script `apply-secrets.sh` in the file `~/.eoepca/state`. 
+Now we create our access key in MinIO. The variables `MINIO_USER` and `MINIO_PASSWORD` have been set by the script `configure-minio.sh` and the variables `S3_ACCESS_KEY`, `S3_SECRET_KEY` have been set by the script `apply-secrets.sh` in the file `~/.eoepca/state`.
+
 Set an alias in `mc` for our MinIO endpoint:
 ```
 source ~/.eoepca/state

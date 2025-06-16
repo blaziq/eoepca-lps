@@ -11,7 +11,7 @@ if [[ -e /tmp/assets/localdns ]]; then
   # Set local hosts file
   IP=`hostname -I | cut -f1 -d' '`
   DOMAIN="eoepca.local"
-  SERVICES="test minio console-minio zoo resource-catalogue registration-api registration-harvester-api eoapi eoapisupport maps datacube-access workspace-api app-hub"
+  SERVICES="test minio console-minio harbor zoo resource-catalogue registration-api registration-harvester-api eoapi eoapisupport maps datacube-access workspace-api app-hub"
   WEBSITES="${DOMAIN} toil-wes.hpc.local `echo ${SERVICES} | sed -e "s/ \|$/.${DOMAIN} /g"`"
   echo "${IP} ${WEBSITES}" >> /etc/hosts
 
@@ -65,6 +65,12 @@ export S3_ACCESS_KEY="eoepca"
 export S3_SECRET_KEY="eoepcatest"
 export S3_REGION="us-east-1"' >> ~/.eoepca/state
   fi
+fi
+
+if [[ -e /tmp/assets/harbor.7z ]]; then
+  # Installing Harbor cli
+  echo "Installing Harbor cli..." >> ${LOG}
+  mkdir -p /usr/local/bin/ && 7z x /tmp/assets/harbor.7z -o/usr/local/bin/ && chmod +x /usr/local/bin/harbor
 fi
 
 if [[ -e /tmp/assets/readwritemany ]]; then

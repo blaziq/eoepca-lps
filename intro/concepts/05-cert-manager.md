@@ -1,4 +1,4 @@
-To make our trainings simple we have decided not to use TLS encryption for the network traffic, therefore the Cert-Manager is not actually required. However, in this Basics training we wiill install it anyway to show how it can be deployed.
+To make our trainings simple we have decided not to use TLS encryption for the network traffic, therefore the Cert-Manager is not actually required. However, in this Basics training we will install it anyway to show how it can be deployed.
 
 One important thing is that we will set it up with internal ClusterIssuer (a local CA) instead of the default and recommended LetsEncrypt since in our environment on the KillerCoda platform we have no possibility to use the latter - no access from the Internet to our cluster.
 
@@ -17,6 +17,11 @@ Then, there is an already provided script in the Deployment Guide to set up loca
 pushd ~/deployment-guide/scripts/internal-tls
 bash setup-internal-tls.sh
 popd
+```{{exec}}
+
+We can check if our ClusterIssuer is present:
+```
+kubectl --namespace cert-manager get clusterissuer -o wide
 ```{{exec}}
 
 For details how these local items are created or how to set up Cert-Manager with LetsEncrypt please refer to the section [TLS Management](https://eoepca.readthedocs.io/projects/deploy/en/latest/prerequisites/tls/) in the Deployment Guide.

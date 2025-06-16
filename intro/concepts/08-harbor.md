@@ -9,8 +9,32 @@ Key features of Harbor include:
 
 As usual, we will deploy Harbor using scripts provided in the EOEPCA Deployment Guide.
 
-Let's check for prerequisites first.
+Let's check for prerequisites first. At this point all of them should be met:
 ```
-cd deployment-guide/scripts/container-registry
+cd ~/deployment-guide/scripts/container-registry
 bash check-prerequisites.sh
 ```{{exec}}
+
+Run the configuration script, answering `no` to all questions since these values are already set correctly:
+```
+bash configure-container-registry.sh
+no
+no
+no
+```{{exec}}
+
+Now add the repository:
+```
+helm repo add harbor https://helm.goharbor.io
+helm repo update harbor
+```{{exec}}
+
+And deploy Harbor into our Kubernetes cluster
+```
+helm upgrade -i harbor harbor/harbor \
+  --version 1.7.3 \
+  --values generated-values.yaml \
+  --namespace harbor \
+  --create-namespace
+```{{exec}}
+
