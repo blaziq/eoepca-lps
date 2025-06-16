@@ -56,7 +56,7 @@ Create Access Key:
 mc admin accesskey create minio-local/ user --access-key ${S3_ACCESS_KEY} --secret-key ${S3_SECRET_KEY}
 ```{{exec}}
 
-We can now validate our deployment with the provided script `validate.sh`. This requires `s3cmd` which has been preinstalled:
+We can now validate our deployment with the provided script `validation.sh`. This requires `s3cmd` which has been preinstalled:
 ```
 bash validation.sh
 y
@@ -76,17 +76,21 @@ mc mb minio-local/test-bucket
 echo "test" > test-file
 mc cp test-file minio-local/test-bucket
 ```{{exec}}
-4. List the content of the test bucket and output the content of the test file in the bucket:
+4. List the content of the test bucket:
 ```
 mc ls minio-local/test-bucket
+```{{exec}}
+5. Output the content of the test file in the bucket:
+```
 mc cat minio-local/test-bucket/test-file
 ```{{exec}}
-5. Remove the test file, test bucket and check that they are gone:
+6. Remove the test file, test bucket and check that they are gone:
 ```
 mc rm minio-local/test-bucket/test-file
+```{{exec}}
+```
 mc rb minio-local/test-bucket
+```{{exec}}
+```
 mc ls minio-local
 ```{{exec}}
-
-
-

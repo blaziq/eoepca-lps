@@ -20,7 +20,7 @@ We wait until the all pods in the `ingress-nginx` namespace are ready:
 kubectl --namespace ingress-nginx wait pod --all --timeout=10m --for=condition=Ready
 ```{{exec}}
 
-Lets create a test ingress for a non-existent service:
+Let's create a test ingress for a non-existent service:
 ```
 cat <<EOF | kubectl apply -f - 
 apiVersion: networking.k8s.io/v1

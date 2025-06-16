@@ -13,7 +13,7 @@ As specified in the Deployment Guide, the following prerequisites are required o
    For long-term deployments, a domain name and a wildcard DNS is required. This ensures that each EOEPCA building block can expose itself as service1.example.com, service2.example.com, etc.
 
    For the purpose of this training and subsequent trainings on individual Building Blocks, we have configured our testbed in a way that:
-   - the domain names of our services are written to the /etc/hosts file
+   - the domain names of our services are written to the `/etc/hosts` file
    - the  `coredns` service in our Kubernetes cluster has been reconfigured to use these local domains
 
 3. **Storage**
@@ -45,5 +45,7 @@ As specified in the Deployment Guide, the following prerequisites are required o
     MinIO is a high-performance object storage system that’s compatible with the Amazon S3 API. In EOEPCA, MinIO can serve as the object storage backend for various services. There is also a possibility to configure an alternative S3-compatible object storage solution instead of MinIO e.g. use an external S3 storage provided by the cloud platform.
 
 8. **Container Registry**
+
+
 
 In the following steps we will deploy and configure the services 3-8 which are not already installed.
