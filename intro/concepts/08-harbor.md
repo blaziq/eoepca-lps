@@ -55,7 +55,7 @@ Again, since we do not have web browser access to our Harbor instance, we will u
 
 For this, we need the Harbor CLI tool [`harbor`](https://github.com/goharbor/harbor-cli). We also need to reconfigure Docker so that it trusts our Harbor registry which otherwise doesn't have a valid certificate. Both requirements have already been installed and/or configured and both are not really necessary in a production environment where Harbor is supposed to have a signed valid TLS certificate.
 
-First we must login to our Harbor registry from Docker:
+First we must login to our Harbor registry from Docker, with the password in the variable `HARBOR_ADMIN_PASSWORD` saved in `~/.eoepca/state`.
 ```
 source ~/.eoepca/state
 docker login -u admin -p "${HARBOR_ADMIN_PASSWORD}" harbor.eoepca.local
@@ -72,7 +72,43 @@ Now we delete the local images:
 ```
 docker image rm alpine:latest
 docker image rm harbor.eoepca.local/library/alpine:latest
+docker image ls
 ```{{exec}}
 
+Now we pull the image from our Harbor registry:
+```
+docker pull harbor.eoepca.local/library/alpine:latest
+docker image ls
+```{{exec}}
 
+Let's check with Harbor CLI the content of the registry. This can typically be done using the web interface.
+- First we must log in to Harbor:
+  ```
+  harbor login -u admin -p ${HARBOR_ADMIN_PASSWORD} harbor.eoepca.local
+  ```{{exec}}
+- List projects:
+  ```
+  harbor project list
+  ```{{exec}}
+- List repositories in the project `library`:
+  ```
+  harbor repo list library
+  ```{{exec}}
+- List artifacts in the repo `library/alpine`:
+  ```
+  harbor artifact list library/alpine
+  ```{{exec}}
+- Show details of the artifact (image) `alpine:latest`, earlier pushed to the registry with Docker, with output in YAML:
+  ```
+  harbor artifact view library/alpine:latest -o yaml
+  ```{{exec}}
+- Delete artifact `alpine:latest` from repo:
+  ```
+  harbor artifact delete library/alpine:latest
+  ```{{exec}}
+- Delete `alpine` repo from project:
+  ```
+  harbor repo delete library/alpine
+  ```{{exec}}
 
+  

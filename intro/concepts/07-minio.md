@@ -35,7 +35,14 @@ helm upgrade -i minio minio/minio \
   --create-namespace
 ```{{exec}}
 
-We must create an access key for the user. Since we are working in a command line environment and cannot access MinIO Console with the browser, we will create the access key for our user manually with the `mc` client that has been preinstalled.
+We wait until the all pods in the `ingress-nginx` namespace are ready:
+```
+kubectl --namespace minio wait pod --all --timeout=10m --for=condition=Ready
+```{{exec}}
+
+---
+
+We must now create an Access Key for the user. Since we are working in a command line environment and cannot access MinIO Console with the browser, we will create the Access Key manually with the `mc` client that has been preinstalled.
 
 First, we set the values of Access Key and Secret Key using the provided script:
 ```
@@ -68,24 +75,24 @@ Let's also do some manual checks using the `mc` client.
 ```
 mc ls minio-local
 ```{{exec}}
-2. Create a test bucket in MinIO:
+1. Create a test bucket in MinIO:
 ```
 mc mb minio-local/test-bucket
 ```{{exec}}
-3. Create a local file and copy it to the test bucket:
+1. Create a local file and copy it to the test bucket:
 ```
 echo "test" > test-file
 mc cp test-file minio-local/test-bucket
 ```{{exec}}
-4. List the content of the test bucket:
+1. List the content of the test bucket:
 ```
 mc ls minio-local/test-bucket
 ```{{exec}}
-5. Output the content of the test file in the bucket:
+1. Output the content of the test file in the bucket:
 ```
 mc cat minio-local/test-bucket/test-file
 ```{{exec}}
-6. Remove the test file, test bucket and check that they are gone:
+1. Remove the test file, test bucket and check that they are gone:
 ```
 mc rm minio-local/test-bucket/test-file
 ```{{exec}}
