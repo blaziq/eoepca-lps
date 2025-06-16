@@ -1,4 +1,4 @@
-For the Kubernetes cluster itself there is one strong requirement: pods must be able to roon as root. This is required by certain EOEPCA component. 
+For the Kubernetes cluster itself there is one strong requirement: pods must be able to run as root. This is required by certain EOEPCA components. 
 
 In typical production environments this is defined by cluster's security policies. Here, we are simply going to check whether in our cluster provided by the KillerCoda platform a pod with root privileges can be created:
 ```
