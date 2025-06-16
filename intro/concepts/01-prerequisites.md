@@ -1,46 +1,47 @@
-As specified in the deployment guide, the following prerequisites are required or recommended to deploy and run EOEPCA building blocks:
+First we obtain the Deployment Guide scripts:
+```
+git clone https://github.com/EOEPCA/deployment-guide
+```{{exec}}
 
-1. **Kubernetes cluster**
+In the Deployment Guide scripts there is a special script for checking if the Kubernetes and infrastructure prerequisites are met. Let's run it now and see what's missing:
+```
+cd ~/deployment-guide/scripts/infra-prereq
+bash check-prerequisites.sh
+```
 
-   This is already provided by the Killercoda platform we are runnning the tutorial on.
+First, we must answer some questions, keeping in mind the configuration we are going to use - this will be explained in details in the next steps:
+- HTTP scheme for the EOEPCA services
+```
+http
+```{{exec}}
+- Nginx ingress controller
+```
+nginx
+```{{exec}}
+- Base domain
+```
+eoepca.local
+```{{exec}}
+- Kubernetes storage class for persistent volumes
+```
+standard
+```{{exec}}
+- Automatic certificate issuance with cert-manager
+```
+yes
+```{{exec}}
+- Cert Manager cluster issuer for TLS certificates
+```
+eoepca-ca-clusterissuer
+```{{exec}}
+- `no` to the other two questions since these values are already set
+```
+no
+no
+```{{exec}}
 
-2. **Wildcard DNS**
-
-   For long-term deployments, a domain name and a wildcard DNS is required. This ensures that each EOEPCA building block can expose itself as service1.example.com, service2.example.com, etc.
-
-   For the purpose of this training and subsequent trainings on individual Building Block, we have configured our testbed in a way that:
-   - the domain names of our services are written to the /etc/hosts file
-   - the  `coredns` service in our Kubernetes cluster has been reconfigured to use these local domains
-
-3. **Storage**
-
-   Some EOEPCA Building Blocks, particularly those involved in processing (e.g. the CWL Processing Engine), require shared storage with ReadWriteMany access. This allows to create volumens to which multiple pods can read and write concurrently.
-
-   For the purpose of this training and subsequent training on individual Building Blocks (where required), we will configure the HostPath provisioner together with its associated `standard` storage class.
-
-4. **Ingress controller**
-
-   The ingress controller recommended by the EOEPCA Develpoment Guide is [APISIX](https://apisix.apache.org/) which is also mandatory if the EOEPCA's IAM (Identity and Access Management) is to be used. However, for other purposes such as a development instance or when a deployment is fully open or has its own authentication and authorization method, [NGINX](https://nginx.org/) ingress controller is supported.
-
-   In the training we are going to deploy and use NGINX.
-
-5. **Load Balancer**
-
-   Typically, a load balancer provided with the cloud platform where EOEPCA is being installed, must be used and configured with the ingress controller to provide access to individual components.
-
-   This is not going to be necessary in our trainings since we are using a very simplified Kubernetes configuration with only one node.
-   
-6. **Cert-Manager**
-
-   Cert-Manager is an essential component for securing communication in EOEPCA, both internally between the component and externally with user clients. In EOEPCA it is typically configured with the LetsEncrypt ACME service (Automated Certificate Management Environment) and can autimatically issue, sign (by LetsEncrtypt) and renew TLS certificates. However, for cases when LetsEncrypt cannot be used there is an alternative method, and there is also a possibility not to install and use Cert-Manager at all in which case the traffic will not be encrypted.
-
-   For the purpose of this training we will install Cert-Manager. However, to make things simple, in trainings on individual Building Blocks it will not be used.
-
-7. **S3 Object storage**
-
-   
-
-8. **Container Registry**
-
-In the following steps we will deploy and configure the services 3-8 which are not already installed.
-
+From the results:
+1. Pods can run as `root` - we will check that in details in one of our next steps
+2. Could not reach ingress - ingress controller is not installed
+3. No ClusterIssuer found - Cert-Manager is not deployed and configured
+4. S
