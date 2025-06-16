@@ -5,7 +5,4 @@ In this tutorial we will follow the instructions from the EOEPCA deployment guid
 Here's how we obtain the deployment scripts:
 ```
 git clone https://github.com/EOEPCA/deployment-guide
-git checkout killercoda-demo
-```
-{{exec}}
-
+```{{exec}}

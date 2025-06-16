@@ -8,10 +8,15 @@ As specified in the deployment guide, the following prerequisites are required o
 
    For long-term deployments, a domain name and a wildcard DNS is required. This ensures that each EOEPCA building block can expose itself as service1.example.com, service2.example.com, etc.
 
-   For the purpose of the training, we have put the domain names of our services in the /etc/hosts file. The  `coredns` service in our Kubernetes cluster has also been configured to use these local domains.
+   For the purpose of this training and subsequent trainings on individual Building Block, we have configured our testbed in a way that:
+   - the domain names of our services are written to the /etc/hosts file
+   - the  `coredns` service in our Kubernetes cluster has been reconfigured to use these local domains
 
 3. **Storage**
 
+   Some EOEPCA Building Blocks, particularly those involved in processing (e.g. the CWL Processing Engine), require shared storage with ReadWriteMany access. This allows to create volumens to which multiple pods can read and write concurrently.
+
+   For the purpose of this training and subsequent training on individual Building Blocks (where required), we will configure the HostPath provisioner together with its associated `standard` storage class.
 
 4. **Ingress controller**
 
@@ -21,9 +26,19 @@ As specified in the deployment guide, the following prerequisites are required o
 
 5. **Load Balancer**
 
+   Typically, a load balancer provided with the cloud platform where EOEPCA is being installed, must be used and configured with the ingress controller to provide access to individual components.
+
+   This is not going to be necessary in our trainings since we are using a very simplified Kubernetes configuration with only one node.
+   
 6. **Cert-Manager**
 
+   Cert-Manager is an essential component for securing communication in EOEPCA, both internally between the component and externally with user clients. In EOEPCA it is typically configured with the LetsEncrypt ACME service (Automated Certificate Management Environment) and can autimatically issue, sign (by LetsEncrtypt) and renew TLS certificates. However, for cases when LetsEncrypt cannot be used there is an alternative method, and there is also a possibility not to install and use Cert-Manager at all in which case the traffic will not be encrypted.
+
+   For the purpose of this training we will install Cert-Manager. However, to make things simple, in trainings on individual Building Blocks it will not be used.
+
 7. **S3 Object storage**
+
+   
 
 8. **Container Registry**
 
