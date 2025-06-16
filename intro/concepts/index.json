@@ -14,20 +14,24 @@
         "text": "01-prerequisites.md"
       },
       {
+        "title": "Kubernetes",
+        "text": "02-kubernetes.md"
+      },
+      {
         "title": "Storage",
-        "text": "02-storage.md"
+        "text": "03-storage.md"
       },
       {
         "title": "Ingress",
-        "text": "03-ingress.md"
+        "text": "04-ingress.md"
       },
       {
         "title": "S3 Object Storage",
-        "text": "04-minio.md"
+        "text": "06-minio.md"
       },
       {
         "title": "Container Registry",
-        "text": "05-harbor.md"
+        "text": "07-harbor.md"
       }
 		],
 		"finish": {
