@@ -41,7 +41,6 @@ if [[ -e /tmp/assets/nginxingress ]]; then
     --namespace ingress-nginx --create-namespace \
     --set controller.ingressClassResource.default=true \
     --set controller.allowSnippetAnnotations=true \
-    --set controller.service.type=LoadBalancer \
     --set controller.hostNetwork=true
 fi
 
