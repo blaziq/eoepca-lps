@@ -12,7 +12,7 @@ As specified in the Deployment Guide, the following prerequisites are required o
 
    For long-term deployments, a domain name and a wildcard DNS is required. This ensures that each EOEPCA building block can expose itself as service1.example.com, service2.example.com, etc.
 
-   For the purpose of this training and subsequent trainings on individual Building Block, we have configured our testbed in a way that:
+   For the purpose of this training and subsequent trainings on individual Building Blocks, we have configured our testbed in a way that:
    - the domain names of our services are written to the /etc/hosts file
    - the  `coredns` service in our Kubernetes cluster has been reconfigured to use these local domains
 

@@ -23,22 +23,22 @@ First, we must answer some questions, keeping in mind the configuration we are g
   eoepca.local
   ```{{exec}}
 - Kubernetes storage class for persistent volumes
-```
-standard
-```{{exec}}
+  ```
+  standard
+  ```{{exec}}
 - Automatic certificate issuance with cert-manager
-```
-yes
-```{{exec}}
+  ```
+  yes
+  ```{{exec}}
 - Cert Manager cluster issuer for TLS certificates
-```
-eoepca-ca-clusterissuer
-```{{exec}}
+  ```
+  eoepca-ca-clusterissuer
+  ```{{exec}}
 - `no` to the other two questions since these values are already set
-```
-no
-no
-```{{exec}}
+  ```
+  no
+  no
+  ```{{exec}}
 
 From the results:
 1. Pods can run as `root` - we will check that in details in one of our next steps
@@ -47,3 +47,4 @@ From the results:
 4. PVC did not bind with RWX - No ReadWriteMany storage class available for instantiating Persistent Volume Claims
 
 Let's address these issues one by one.
+
