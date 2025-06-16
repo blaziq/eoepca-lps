@@ -73,6 +73,12 @@ if [[ -e /tmp/assets/harbor.7z ]]; then
   mkdir -p /usr/local/bin/ && 7z x /tmp/assets/harbor.7z -o/usr/local/bin/ && chmod +x /usr/local/bin/harbor
 fi
 
+if [[ -e /tmp/assets/harbordocker ]]; then
+  echo "Adding EOEPCA harbor as insecure repository to docker..." >> ${LOG}
+  jq '. + { "insecure-registries": ["harbor.eoepca.local"] }' /etc/docker/daemon.json > /etc/docker/daemon.json.tmp && mv /etc/docker/daemon.json.tmp /etc/docker/daemon.json
+  systemctl restart docker
+fi
+
 if [[ -e /tmp/assets/readwritemany ]]; then
   ### Prerequisites: readwritemany StorageClass
   echo "Enabling ReadWriteMany StorageClass.."  >> ${LOG}

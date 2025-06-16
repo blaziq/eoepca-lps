@@ -38,3 +38,41 @@ helm upgrade -i harbor harbor/harbor \
   --create-namespace
 ```{{exec}}
 
+We wait until the all pods in the `harbor` namespace are ready:
+```
+kubectl --namespace harbor wait pod --all --timeout=10m --for=condition=Ready
+```{{exec}}
+
+We can now run the script `validation.sh` to see if our Harbor deployment works fine:
+```
+bash validation.sh
+```{{exec}}
+
+Again, since we do not have web browser access to our Harbor instance, we will use a combination of command line tools to perform some operations on Harbor:
+- create a project
+- push and pull images
+- list the content of repositories
+
+For this, we need the Harbor CLI tool [`harbor`](https://github.com/goharbor/harbor-cli). We also need to reconfigure Docker so that it trusts our Harbor registry which otherwise doesn't have a valid certificate. Both requirements have already been installed and/or configured and both are not really necessary in a production environment where Harbor is supposed to have a signed valid TLS certificate.
+
+First we must login to our Harbor registry from Docker:
+```
+source ~/.eoepca/state
+docker login -u admin -p "${HARBOR_ADMIN_PASSWORD}" harbor.eoepca.local
+```{{exec}}
+
+We pull an image from DockerHub, tag it and push it to Harbor. Typically, local images created by users will be stored that way.
+```
+docker pull alpine:latest
+docker tag alpine:latest harbor.eoepca.local/library/alpine:latest
+docker push harbor.eoepca.local/library/alpine:latest
+```{{exec}}
+
+Now we delete the local images:
+```
+docker image rm alpine:latest
+docker image rm harbor.eoepca.local/library/alpine:latest
+```{{exec}}
+
+
+
