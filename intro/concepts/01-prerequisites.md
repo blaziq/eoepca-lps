@@ -40,6 +40,8 @@ First, we must answer some questions, keeping in mind the configuration we are g
   no
   ```{{exec}}
 
+--- 
+
 From the results:
 1. Pods can run as `root` - we will check that in details in one of our next steps
 2. Could not reach ingress - ingress controller is not installed
@@ -47,4 +49,3 @@ From the results:
 4. PVC did not bind with RWX - No ReadWriteMany storage class available for instantiating Persistent Volume Claims
 
 Let's address these issues one by one.
-
