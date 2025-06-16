@@ -1,0 +1,19 @@
+Now we check again whether all the prerequisites are met. To do this, we run the `check-prerequisites` script again:
+```
+cd ~/deployment-guide/scripts/infra-prereq
+bash check-prerequisites.sh
+```{{exec}}
+
+with `no` to the two questions:
+```
+no
+no
+```{{exec}}
+
+From the results:
+1. Pods can run as `root`
+2. Ingress responded successfully
+3. ClusterIssuer found
+4. PVC 'test-rwx-pvc' successfully bound with ReadWriteMany
+
+All the requirements are satisfied!

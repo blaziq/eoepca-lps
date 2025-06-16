@@ -7,7 +7,7 @@ kubectl apply -f https://raw.githubusercontent.com/EOEPCA/deployment-guide/refs/
 
 We can check if the provisioner has been deployed:
 ```
-get -n kube-system sc/standard deploy/hostpath-storage-provisioner
+kubectl get -n kube-system sc/standard deploy/hostpath-storage-provisioner
 ```{{exec}}
 
 Now, we can try to create a persistent volume claim (PVC) with ReadWriteMany access:

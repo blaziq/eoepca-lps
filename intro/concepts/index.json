@@ -26,12 +26,20 @@
         "text": "04-ingress.md"
       },
       {
+        "title": "Cert-Manager",
+        "text": "05-cert-manager.md"
+      },
+      {
+        "title": "Prerequisites 2",
+        "text": "06-prerequisites-2.md"
+      },
+      {
         "title": "S3 Object Storage",
-        "text": "06-minio.md"
+        "text": "07-minio.md"
       },
       {
         "title": "Container Registry",
-        "text": "07-harbor.md"
+        "text": "08-harbor.md"
       }
 		],
 		"finish": {
