@@ -9,23 +9,32 @@ no
 no
 ```{{exec}}
 
-S3 Host URL
+We do not use MinIO S3 Storage in our tutorial, nevertheless it is necessary to give the name of the S3 host:
 ```
 minio.eoepca.local
 ```{{exec}}
 
+We do not want to update previously set values for S3_ACCESS_KEY and S3_SECRET_KEY, they won't be used anyway:
 S3_ACCESS_KEY is already set to 'eoepca'. Do you want to update it
 ```
 no
-```{{exec}}
-
-S3_SECRET_KEY is already set to 'eoepcatest'. Do you want to update it
-```
 no
 ```{{exec}}
 
+<!--
 Finally, we create a Kubernetes secret with S3 credentials. Also here a script is provided in the Deployment Guide.
 ```
 bash apply-secrets.sh
 kubectl -n data-access get secrets
 ```{{exec}}
+-->
+
+Now, since our Kubernetes cluster comprises only one node with limited resources, we must adjust the deployment configuration to the platform constraints such as memory limits. We will also use the Postgres database that was preinstalled on the host from the distribution package instead of one deployed in a pod (which is the default). Finally, we can turn on or off deployment of certain components of the Building Block.
+
+These changes are not configurable with the `configure-data-access.sh` script and we cannot easily edit the default `values.yaml` of the deployment. The method we use is to patch the file `eoapi/generated-values.yaml` with some extra values from a file  `generated-values-patch.yaml` that was created specifically for this tutorial.
+```
+yq ea '. as $item ireduce ({}; . *+ $item )' -i eoapi/generated-values.yaml /tmp/assets/generated-values-patch.yaml
+cat eoapi/generated-values.yaml
+```{{exec}}
+
+Note, that this is not a solution for production environments.

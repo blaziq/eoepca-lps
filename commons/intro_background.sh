@@ -173,5 +173,12 @@ if [[ -e /tmp/assets/s3cmd ]]; then
   echo "check_ssl_certificate = False" >> ~/.s3cfg
 fi
 
+APT_UPDATED_FLAG=/tmp/apt-is-updated
+
+for script in /tmp/assets/*.sh; do
+  chmod +x ${script}
+  ${script} ${LOG} ${APT_UPDATED_FLAG}
+done
+
 #Stop the foreground script (we may finish our script before tail starts in the foreground, so we need to wait for it to start if it does not exist)
 while ! killall tail; do sleep 1; done

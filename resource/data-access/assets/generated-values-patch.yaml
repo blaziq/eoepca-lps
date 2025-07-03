@@ -1,0 +1,50 @@
+postgrescluster:
+  enabled: false
+  postGISVersion: "3.4"
+
+postgresql:
+  type: "external-plaintext"
+  external:
+    host: "eoapi-db.eoepca.local"
+    port: "5432"
+    database: "eoapi"
+    credentials:
+      username: "eoapi"
+      password: "eoapi"
+
+raster:
+  enabled: true
+  settings:
+    resources:
+      requests:
+        memory: "1024Mi"
+      limits:
+        memory: "1024Mi"
+
+multidim:
+  enabled: false
+  settings:
+    resources:
+      requests:
+        memory: "512Mi"
+      limits:
+        memory: "1024Mi"
+
+stac:
+  enabled: true
+  settings:
+    resources:
+      limits:
+        cpu: "1280m"
+        memory: "1024Mi"
+      requests:
+        cpu: "512m"
+
+vector:
+  enabled: true
+  settings:
+    resources:
+      limits:
+        memory: "1024Mi"
+      requests:
+        memory: "512Mi"
