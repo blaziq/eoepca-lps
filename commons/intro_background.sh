@@ -135,16 +135,17 @@ spec:
 EOF
 fi
 
+APT_UPDATED_FLAG=/tmp/apt-is-updated
+[[ -e ${APT_UPDATED_FLAG} ]] || { apt update -y; touch ${APT_UPDATED_FLAG} }
+
 if [[ -e /tmp/assets/pythonvenv ]]; then
   # Enable Pyton virtual environments
   echo "Enabling Python virtual environments..." >> ${LOG}
-  [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
   apt install -y python3.12-venv
 fi
 
 if [[ -e /tmp/assets/htcondor ]]; then
   echo "Installing HPC batch system for ubuntu user..." >> ${LOG}
-  [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
   apt install -y minicondor </dev/null
   # Allow ubuntu user to submit jobs
   usermod -a -G docker ubuntu
@@ -161,20 +162,15 @@ fi
 if [[ -e /tmp/assets/xmltools ]]; then
   # Install XML utils for parsing output from service endpoint
   echo "Installing XML Utils..." >> ${LOG}
-  [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
   apt install -y libxml2-utils
 fi
 
 if [[ -e /tmp/assets/s3cmd ]]; then
   # Install XML utils for parsing output from service endpoint
   echo "Installing s3cmd..." >> ${LOG}
-  [[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
   apt install -y s3cmd
   echo "check_ssl_certificate = False" >> ~/.s3cfg
 fi
-
-APT_UPDATED_FLAG=/tmp/apt-is-updated
-[[ -e ${APT_UPDATED_FLAG} ]] || { apt update -y; touch ${APT_UPDATED_FLAG} }
 
 for script in /tmp/assets/*.sh; do
   /bin/bash ${script} ${LOG}
