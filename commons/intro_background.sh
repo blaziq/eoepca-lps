@@ -174,10 +174,10 @@ if [[ -e /tmp/assets/s3cmd ]]; then
 fi
 
 APT_UPDATED_FLAG=/tmp/apt-is-updated
+[[ -e ${APT_UPDATED_FLAG} ]] || { apt update -y; touch ${APT_UPDATED_FLAG} }
 
 for script in /tmp/assets/*.sh; do
-  chmod +x ${script}
-  ${script} ${LOG} ${APT_UPDATED_FLAG}
+  /bin/bash ${script} ${LOG}
 done
 
 #Stop the foreground script (we may finish our script before tail starts in the foreground, so we need to wait for it to start if it does not exist)

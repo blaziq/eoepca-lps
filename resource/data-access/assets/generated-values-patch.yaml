@@ -16,8 +16,6 @@ raster:
   enabled: true
   settings:
     resources:
-      requests:
-        memory: "1024Mi"
       limits:
         memory: "1024Mi"
 
@@ -25,8 +23,6 @@ multidim:
   enabled: false
   settings:
     resources:
-      requests:
-        memory: "512Mi"
       limits:
         memory: "1024Mi"
 
@@ -37,8 +33,6 @@ stac:
       limits:
         cpu: "1280m"
         memory: "1024Mi"
-      requests:
-        cpu: "512m"
 
 vector:
   enabled: true
@@ -46,5 +40,3 @@ vector:
     resources:
       limits:
         memory: "1024Mi"
-      requests:
-        memory: "512Mi"
