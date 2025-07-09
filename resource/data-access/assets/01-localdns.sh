@@ -4,7 +4,7 @@
 echo "Setting local dns..." >> ${LOG}
 IP=`hostname -I | cut -f1 -d' '`
 WEBSITES=
-while read port host; do
+while read port host types; do
     WEBSITES="${WEBSITES} ${host}"
 done < ${EOEPCA_HOSTS}
 
