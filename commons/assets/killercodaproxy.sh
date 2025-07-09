@@ -34,7 +34,7 @@ while read dest port types; do
   fi
 done < ${EOEPCA_HOSTS}
 
-while read port dest types; do
+while read dest port types; do
   if [[ "${port}" != "" ]]; then
     cat <<EOF >>/etc/nginx/nginx.conf
   server {
