@@ -4,6 +4,8 @@
 export LOG="/tmp/killercoda_setup.log"
 export EOEPCA_HOSTS="/tmp/assets/hosts"
 
+alias df="df -x overlay -x tmpfs -x devtmpfs -x shm"
+
 echo "Setting-up your environment... wait till this setup terminates before starting the tutorial" >> ${LOG}
 
 if [[ -e /tmp/assets/localdns ]]; then
