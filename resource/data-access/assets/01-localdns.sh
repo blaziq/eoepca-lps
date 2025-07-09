@@ -6,7 +6,7 @@ IP=`hostname -I | cut -f1 -d' '`
 WEBSITES=
 while read port host; do
     WEBSITES="${WEBSITES} ${host}"
-done < /tmp/assets/hosts
+done < ${EOEPCA_HOSTS}
 
 echo "${IP} ${WEBSITES}" >> /etc/hosts
 

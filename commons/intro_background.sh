@@ -2,8 +2,9 @@
 # Script to set pre-requisites for EOEPCA components
 
 export LOG="/tmp/killercoda_setup.log"
+export EOEPCA_HOSTS="/tmp/assets/hosts"
 
-echo "Setting-up your environment... wait till this setup terminates before starting the tutorial" >> /tmp/killercoda_setup.log
+echo "Setting-up your environment... wait till this setup terminates before starting the tutorial" >> ${LOG}
 
 if [[ -e /tmp/assets/localdns ]]; then
   # DNS-es for dependencies
