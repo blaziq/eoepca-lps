@@ -1,8 +1,9 @@
 #!/bin/bash
 # Script to set pre-requisites for EOEPCA components
 
+export LOG="/tmp/killercoda_setup.log"
+
 echo "Setting-up your environment... wait till this setup terminates before starting the tutorial" >> /tmp/killercoda_setup.log
-LOG="/tmp/killercoda_setup.log"
 
 if [[ -e /tmp/assets/localdns ]]; then
   # DNS-es for dependencies
@@ -175,7 +176,7 @@ if [[ -e /tmp/assets/s3cmd ]]; then
 fi
 
 for script in /tmp/assets/*.sh; do
-  /bin/bash ${script} ${LOG}
+  /bin/bash ${script}
 done
 
 #Stop the foreground script (we may finish our script before tail starts in the foreground, so we need to wait for it to start if it does not exist)

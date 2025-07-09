@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Installing PostgreSQL..." >> $1
+echo "Installing PostgreSQL..." >> ${LOG}
 
 apt install -y postgresql-16-postgis-3 < /dev/null
 su - postgres -c "echo \"listen_addresses = '*'\" >> /etc/postgresql/16/main/postgresql.conf"
