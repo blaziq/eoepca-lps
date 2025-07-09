@@ -135,8 +135,10 @@ spec:
 EOF
 fi
 
-APT_UPDATED_FLAG=/tmp/apt-is-updated
-[[ -e ${APT_UPDATED_FLAG} ]] || { apt update -y; touch ${APT_UPDATED_FLAG} }
+#APT_UPDATED_FLAG=/tmp/apt-is-updated
+#[[ -e ${APT_UPDATED_FLAG} ]] || { apt update -y; touch ${APT_UPDATED_FLAG} }
+[[ -e /tmp/apt-is-updated ]] || { apt update -y; touch /tmp/apt-is-updated; }
+
 
 if [[ -e /tmp/assets/pythonvenv ]]; then
   # Enable Pyton virtual environments
