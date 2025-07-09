@@ -12,7 +12,7 @@ As ususal in this tutorial, we will use the EOEPCA Deployment Guide scripts to h
 
 We download and uncompress the **eoepca-2.0-rc1b** version of the EOEPCA Deployment Guide, to which this tutorial refers. This contains the deployment scripts we will use for our EOEPCA deployment
 ```
-curl -L https://github.com/EOEPCA/deployment-guide/tarball/eoepca-2.0-rc1b | tar zx --transform 's|^EOEPCA[^/]*|deployment-guide|'
+curl -s -L https://github.com/EOEPCA/deployment-guide/tarball/eoepca-2.0-rc1b | tar zx --transform 's|^EOEPCA[^/]*|deployment-guide|'
 ```{{exec}}
 
 <!--
