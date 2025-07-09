@@ -29,13 +29,13 @@ EOF
 # redirections like the ones done by OPA will not work...
 echo -n "" > /tmp/assets/killercodaproxy_redirects
 while read port dest types; do
-  if [[ "${port}" -ne "--" ]]; then
+  if [[ "${port}" != "--" ]]; then
     echo "        proxy_redirect http://$dest `sed -e "s/PORT/$port/g" /etc/killercoda/host`;" >> /tmp/assets/killercodaproxy_redirects
   fi
 done < ${EOEPCA_HOSTS}
 
 while read port dest types; do
-  if [[ "${port}" -ne "--" ]]; then
+  if [[ "${port}" != "--" ]]; then
     cat <<EOF >>/etc/nginx/nginx.conf
   server {
     listen  $port;
