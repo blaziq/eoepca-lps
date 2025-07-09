@@ -28,14 +28,14 @@ EOF
 # All the proxy redirects must be placed into all the proxied sites, otherwise cross-site
 # redirections like the ones done by OPA will not work...
 echo -n "" > /tmp/assets/killercodaproxy_redirects
-while read port dest types; do
-  if [[ "${port}" != "--" ]]; then
+while read dest port types; do
+  if [[ "${port}" != "" ]]; then
     echo "        proxy_redirect http://$dest `sed -e "s/PORT/$port/g" /etc/killercoda/host`;" >> /tmp/assets/killercodaproxy_redirects
   fi
 done < ${EOEPCA_HOSTS}
 
 while read port dest types; do
-  if [[ "${port}" != "--" ]]; then
+  if [[ "${port}" != "" ]]; then
     cat <<EOF >>/etc/nginx/nginx.conf
   server {
     listen  $port;
