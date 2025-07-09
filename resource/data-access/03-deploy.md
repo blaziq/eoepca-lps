@@ -1,17 +1,9 @@
 ```
-helm upgrade -i pgo oci://registry.developers.crunchydata.com/crunchydata/pgo \
-  --version 5.6.0 \
-  --namespace data-access \
-  --create-namespace \
-  --values postgres/generated-values.yaml
-```{{exec}}
-
-```
 helm repo add eoapi https://devseed.com/eoapi-k8s/
 helm repo update eoapi
 helm upgrade -i eoapi eoapi/eoapi \
-  --version 0.6.0 \
   --namespace data-access \
+  --create-namespace \
   --values eoapi/generated-values.yaml
 ```{{exec}}
 
