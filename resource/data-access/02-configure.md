@@ -33,13 +33,9 @@ Now, since our Kubernetes cluster comprises only one node with limited resources
 
 These changes are not configurable with the `configure-data-access.sh` script and we cannot easily edit the default `values.yaml` of the deployment. The method we use is to patch the file `eoapi/generated-values.yaml` with some extra values from a file  `generated-values-patch.yaml` that was created specifically for this tutorial.
 ```
+source ~/.eoepca/state
 yq ea '. as $item ireduce ({}; . *+ $item )' -i eoapi/generated-values.yaml /tmp/assets/eoapi-generated-values-patch.yaml
-cat eoapi/generated-values.yaml
-```{{exec}}
-
-```
 sed -E -i -e "s|https://(eoapi\|maps)|${HTTP_SCHEME}://\1|g" eoapi-maps-plugin/generated-values.yaml 
 ```{{exec}}
-
 
 Note, that this is not a solution for production environments.
