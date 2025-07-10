@@ -4,8 +4,6 @@
 export LOG="/tmp/killercoda_setup.log"
 export EOEPCA_HOSTS="/tmp/assets/hosts"
 
-alias df="df -x overlay -x tmpfs -x devtmpfs -x shm"
-
 echo "Setting-up your environment... wait till this setup terminates before starting the tutorial" >> ${LOG}
 
 if [[ -e /tmp/assets/localdns ]]; then
@@ -179,7 +177,7 @@ if [[ -e /tmp/assets/s3cmd ]]; then
 fi
 
 for script in /tmp/assets/*.sh; do
-  /bin/bash ${script}
+  /bin/bash ${script} &
 done
 
 #Stop the foreground script (we may finish our script before tail starts in the foreground, so we need to wait for it to start if it does not exist)
