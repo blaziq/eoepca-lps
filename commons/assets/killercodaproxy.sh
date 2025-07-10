@@ -38,22 +38,22 @@ while read dest port types; do
   if [[ "${port}" != "" ]]; then
     cat <<EOF >>/etc/nginx/nginx.conf
   server {
-    listen  $port;
-      location / {
-        proxy_pass http://$dest;
-        proxy_set_header Host $dest;
-        proxy_set_header Accept-Encoding "";
+    listen $port;
+    location / {
+      proxy_pass http://$dest;
+      proxy_set_header Host $dest:80;
+      proxy_set_header Accept-Encoding "";
 EOF
   
     cat /tmp/assets/killercodaproxy_redirects >> /etc/nginx/nginx.conf
     [[ "$types" != "NONE" && "$types" != "'NONE'" ]] && cat <<EOF >>/etc/nginx/nginx.conf
-        subs_filter http://$dest  `sed -e "s/PORT/$port/g" /etc/killercoda/host`;
-        subs_filter $dest  `sed -e "s/PORT/$port/g" -e "s|^https://||" /etc/killercoda/host`;
-        subs_filter_types ${types//\'/};
+      subs_filter http://$dest `sed -e "s/PORT/$port/g" /etc/killercoda/host`;
+      subs_filter $dest `sed -e "s/PORT/$port/g" -e "s|^https://||" /etc/killercoda/host`;
+      subs_filter_types ${types//\'/};
 EOF
   
     cat <<EOF >>/etc/nginx/nginx.conf
-      }
+    }
   }
 EOF
   fi
