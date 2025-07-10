@@ -80,12 +80,12 @@ if [[ -e /tmp/assets/harbordocker ]]; then
   systemctl restart docker
 fi
 
-if [[ -e /tmp/assets/readwritemany ]]; then
-  ### Prerequisites: readwritemany StorageClass
-  echo "Enabling ReadWriteMany StorageClass.."  >> ${LOG}
-  kubectl apply -f https://raw.githubusercontent.com/EOEPCA/deployment-guide/refs/heads/main/docs/prerequisites/hostpath-provisioner.yaml
-  echo 'export STORAGE_CLASS="standard"'>>~/.eoepca/state
-fi
+# if [[ -e /tmp/assets/readwritemany ]]; then
+#   ### Prerequisites: readwritemany StorageClass
+#   echo "Enabling ReadWriteMany StorageClass.."  >> ${LOG}
+#   kubectl apply -f https://raw.githubusercontent.com/EOEPCA/deployment-guide/refs/heads/main/docs/prerequisites/hostpath-provisioner.yaml
+#   echo 'export STORAGE_CLASS="standard"'>>~/.eoepca/state
+# fi
 
 if [[ -e /tmp/assets/ignoreresrequests ]]; then
   ### Avoid applyiing resource limits, otherwise Clarissian will not work as limits are hardcoded in there...

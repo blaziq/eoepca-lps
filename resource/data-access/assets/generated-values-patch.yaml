@@ -37,7 +37,7 @@ stac:
       requests:
         memory: "0"
       limits:
-        cpu: "1280m"
+        cpu: "0"
         memory: "1024Mi"
 
 vector:
