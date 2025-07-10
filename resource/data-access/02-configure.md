@@ -36,6 +36,7 @@ These changes are not configurable with the `configure-data-access.sh` script an
 source ~/.eoepca/state
 yq ea '. as $item ireduce ({}; . *+ $item )' -i eoapi/generated-values.yaml /tmp/assets/eoapi-generated-values-patch.yaml
 sed -E -i -e "s|https://(eoapi\|maps)|${HTTP_SCHEME}://\1|g" eoapi-maps-plugin/generated-values.yaml 
+yq -i "del .ingress.tls" eoapi-maps-plugin/generated-values.yaml
 ```{{exec}}
 
 Note, that this is not a solution for production environments.

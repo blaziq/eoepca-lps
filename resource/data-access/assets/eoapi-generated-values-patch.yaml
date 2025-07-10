@@ -47,7 +47,7 @@ stac:
         memory: "1024Mi"
 
 vector:
-  enabled: true
+  enabled: false
   settings:
     resources:
       requests:
