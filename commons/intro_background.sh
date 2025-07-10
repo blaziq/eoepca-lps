@@ -6,67 +6,67 @@ export EOEPCA_HOSTS="/tmp/assets/hosts"
 
 echo "Setting-up your environment... wait till this setup terminates before starting the tutorial" >> ${LOG}
 
-if [[ -e /tmp/assets/localdns ]]; then
-  # DNS-es for dependencies
-  echo "Setting local DNS..." >> ${LOG}
+# if [[ -e /tmp/assets/localdns ]]; then
+#   # DNS-es for dependencies
+#   echo "Setting local DNS..." >> ${LOG}
 
-  # Set local hosts file
-  IP=`hostname -I | cut -f1 -d' '`
-  DOMAIN="eoepca.local"
-  SERVICES="test minio console-minio harbor zoo resource-catalogue registration-api registration-harvester-api eoapi-db eoapi eoapisupport maps datacube-access workspace-api app-hub"
-  WEBSITES="${DOMAIN} toil-wes.hpc.local `echo ${SERVICES} | sed -e "s/ \|$/.${DOMAIN} /g"`"
-  echo "${IP} ${WEBSITES}" >> /etc/hosts
+#   # Set local hosts file
+#   IP=`hostname -I | cut -f1 -d' '`
+#   DOMAIN="eoepca.local"
+#   SERVICES="test minio console-minio harbor zoo resource-catalogue registration-api registration-harvester-api eoapi-db eoapi eoapisupport maps datacube-access workspace-api app-hub"
+#   WEBSITES="${DOMAIN} toil-wes.hpc.local `echo ${SERVICES} | sed -e "s/ \|$/.${DOMAIN} /g"`"
+#   echo "${IP} ${WEBSITES}" >> /etc/hosts
 
-  # Update CoreDNS config map in Kubernetes
-  kubectl get -n kube-system configmap/coredns -o yaml > kc.yml
-  sed -i "s|ready|ready\n        hosts {\n          ${IP} ${WEBSITES}\n          fallthrough\n        }|" kc.yml
-  kubectl apply -f kc.yml 
-  rm kc.yml
-  kubectl rollout restart -n kube-system deployment/coredns
-fi
+#   # Update CoreDNS config map in Kubernetes
+#   kubectl get -n kube-system configmap/coredns -o yaml > kc.yml
+#   sed -i "s|ready|ready\n        hosts {\n          ${IP} ${WEBSITES}\n          fallthrough\n        }|" kc.yml
+#   kubectl apply -f kc.yml 
+#   rm kc.yml
+#   kubectl rollout restart -n kube-system deployment/coredns
+# fi
 
-if [[ -e /tmp/assets/gomplate.7z ]]; then
-  # Gomplate is a dependency of the deployment tool
-  # Installing it from local instead then remote for speed
-  # curl -s -S -L -o /usr/local/bin/gomplate https://github.com/hairyhenderson/gomplate/releases/download/v4.3.0/gomplate_linux-amd64 && chmod +x /usr/local/bin/gomplate
-  echo "Installing gomplate..." >> ${LOG}
-  mkdir -p /usr/local/bin/ 
-  7z x /tmp/assets/gomplate.7z -o/usr/local/bin/
-  chmod +x /usr/local/bin/gomplate
-fi
+# if [[ -e /tmp/assets/gomplate.7z ]]; then
+#   # Gomplate is a dependency of the deployment tool
+#   # Installing it from local instead then remote for speed
+#   # curl -s -S -L -o /usr/local/bin/gomplate https://github.com/hairyhenderson/gomplate/releases/download/v4.3.0/gomplate_linux-amd64 && chmod +x /usr/local/bin/gomplate
+#   echo "Installing gomplate..." >> ${LOG}
+#   mkdir -p /usr/local/bin/ 
+#   7z x /tmp/assets/gomplate.7z -o/usr/local/bin/
+#   chmod +x /usr/local/bin/gomplate
+# fi
 
-if [[ -e /tmp/assets/nginxingress ]]; then
-  # Installing nginx ingress controller (basic)
-  echo "Installing nginx ingress controller..." >> ${LOG}
-  helm upgrade --install ingress-nginx ingress-nginx \
-    --repo https://kubernetes.github.io/ingress-nginx \
-    --namespace ingress-nginx --create-namespace \
-    --set controller.ingressClassResource.default=true \
-    --set controller.allowSnippetAnnotations=true \
-    --set controller.hostNetwork=true
-fi
+# if [[ -e /tmp/assets/nginxingress ]]; then
+#   # Installing nginx ingress controller (basic)
+#   echo "Installing nginx ingress controller..." >> ${LOG}
+#   helm upgrade --install ingress-nginx ingress-nginx \
+#     --repo https://kubernetes.github.io/ingress-nginx \
+#     --namespace ingress-nginx --create-namespace \
+#     --set controller.ingressClassResource.default=true \
+#     --set controller.allowSnippetAnnotations=true \
+#     --set controller.hostNetwork=true
+# fi
 
-if [[ -e /tmp/assets/minio.7z ]]; then
-  # Installing Minio S3 storage (basic)
-  echo "Installing Minio S3 object storage..." >> ${LOG}
-  # Prerequisite: minio
-  # We have this locally installed for speed
-  # wget -q https://dl.min.io/server/minio/release/linux-amd64/minio -O /usr/local/bin/minio && chmod +x /usr/local/bin/minio
-  # wget -q https://dl.min.io/client/mc/release/linux-amd64/mc -O  /usr/local/bin/mc && chmod +x /usr/local/bin/mc
-  mkdir -p /usr/local/bin/ && 7z x /tmp/assets/minio.7z -o/usr/local/bin/ && chmod +x /usr/local/bin/mc /usr/local/bin/minio
-  if [[ ! -e /tmp/assets/minioclientonly ]]; then
-    echo "Setting up local Minio S3 object storage server..." >> ${LOG}  
-    mkdir -p ~/minio && MINIO_ROOT_USER=eoepca MINIO_ROOT_PASSWORD=eoepcatest nohup minio server --quiet ~/minio &>/dev/null &
-    sleep 1
-    while ! mc config host add minio-local http://minio.eoepca.local:9000/ eoepca eoepcatest; do sleep 1; done
-    # mc alias set minio-local http://minio.eoepca.local:9000/ eoepca eoepcatest
-    mc mb minio-local/eoepca
-    mkdir -p ~/.eoepca && echo 'export S3_ENDPOINT="http://minio.eoepca.local:9000/"
-export S3_ACCESS_KEY="eoepca" 
-export S3_SECRET_KEY="eoepcatest"
-export S3_REGION="us-east-1"' >> ~/.eoepca/state
-  fi
-fi
+# if [[ -e /tmp/assets/minio.7z ]]; then
+#   # Installing Minio S3 storage (basic)
+#   echo "Installing Minio S3 object storage..." >> ${LOG}
+#   # Prerequisite: minio
+#   # We have this locally installed for speed
+#   # wget -q https://dl.min.io/server/minio/release/linux-amd64/minio -O /usr/local/bin/minio && chmod +x /usr/local/bin/minio
+#   # wget -q https://dl.min.io/client/mc/release/linux-amd64/mc -O  /usr/local/bin/mc && chmod +x /usr/local/bin/mc
+#   mkdir -p /usr/local/bin/ && 7z x /tmp/assets/minio.7z -o/usr/local/bin/ && chmod +x /usr/local/bin/mc /usr/local/bin/minio
+#   if [[ ! -e /tmp/assets/minioclientonly ]]; then
+#     echo "Setting up local Minio S3 object storage server..." >> ${LOG}  
+#     mkdir -p ~/minio && MINIO_ROOT_USER=eoepca MINIO_ROOT_PASSWORD=eoepcatest nohup minio server --quiet ~/minio &>/dev/null &
+#     sleep 1
+#     while ! mc config host add minio-local http://minio.eoepca.local:9000/ eoepca eoepcatest; do sleep 1; done
+#     # mc alias set minio-local http://minio.eoepca.local:9000/ eoepca eoepcatest
+#     mc mb minio-local/eoepca
+#     mkdir -p ~/.eoepca && echo 'export S3_ENDPOINT="http://minio.eoepca.local:9000/"
+# export S3_ACCESS_KEY="eoepca" 
+# export S3_SECRET_KEY="eoepcatest"
+# export S3_REGION="us-east-1"' >> ~/.eoepca/state
+#   fi
+# fi
 
 if [[ -e /tmp/assets/harbor.7z ]]; then
   # Installing Harbor cli
