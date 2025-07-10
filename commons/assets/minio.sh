@@ -10,7 +10,7 @@ echo -n "Setting up Minio S3 object storage..." >> ${LOG}
 if [[ -e /tmp/assets/minio.7z ]]; then
     echo -n " client..." >> ${LOG}
     mkdir -p /usr/local/bin/ && 7z x /tmp/assets/minio.7z -o/usr/local/bin/ && chmod +x /usr/local/bin/mc /usr/local/bin/minio
-    if [[ "$0" != *"minioclient.sh" ]]; then
+    if [[ "$0" != *"-client.sh" ]]; then
         #echo "Setting up local Minio S3 object storage server..." >> ${LOG}  
         echo -n " server..." >> ${LOG}
         mkdir -p ~/minio && MINIO_ROOT_USER=eoepca MINIO_ROOT_PASSWORD=eoepcatest nohup minio server --quiet ~/minio &>/dev/null &
