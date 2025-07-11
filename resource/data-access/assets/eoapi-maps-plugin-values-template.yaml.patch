@@ -9,7 +9,7 @@
    - hosts:
        - maps.{{ getenv "INGRESS_HOST" }}
      secretName: data-access-maps-tls
-+  {{ end }}
++  {{- end }}
  resources:
    requests:
      memory: "256Mi"

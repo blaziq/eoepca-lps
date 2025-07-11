@@ -1,0 +1,77 @@
+--- values-template.yaml.orig   2025-07-11 17:09:20.304580466 +0000
++++ values-template.yaml        2025-07-11 17:11:22.859620773 +0000
+@@ -22,9 +22,13 @@
+   enabled: false
+ 
+ postgrescluster:
++  {{- if eq (getenv "EOAPI_POSTGRES_CLUSTER") "yes" }}
+   enabled: true
++  {{- else }}
++  enabled: false
++  {{- end }}
+   postgresVersion: 16
+-  postGISVersion: 3.4
++  postGISVersion: "3.4"
+   pgBouncerReplicas: 1
+   monitoring: false
+   backupsEnabled: true
+@@ -41,6 +45,18 @@
+           requests:
+             storage: 1Gi
+ 
++{{- if eq (getenv "EOAPI_POSTGRES_CLUSTER") "no" }}
++postgresql:
++  type: "external-plaintext"
++  external:
++    host: "{{ getenv "EOAPI_POSTGRES_HOST" }}"
++    port: "{{ getenv "EOAPI_POSTGRES_PORT" }}"
++    database: "{{ getenv "EOAPI_POSTGRES_DB" }}"
++    credentials:
++      username: "{{ getenv "EOAPI_POSTGRES_USER" }}"
++      password: "{{ getenv "EOAPI_POSTGRES_PASS" }}"
++{{- end }}
++
+ pgstacBootstrap:
+   enabled: true
+   settings:
+@@ -48,7 +64,7 @@
+       KEEP_ALIVE: "false"
+ 
+ raster:
+-  enabled: true
++  enabled: {{ getenv "EOAPI_COMPONENT_RASTER" }}
+   image:
+     tag: "1.4.0"
+   settings:
+@@ -60,8 +76,8 @@
+     resources:
+       requests:
+         memory: "3072Mi"
+ multidim: 
+-  enabled: true
++  enabled: {{ getenv "EOAPI_COMPONENT_MULTIDIM" }}
+   settings:
+     envSecrets:
+           - data-access
+@@ -69,7 +85,7 @@
+       requests:
+         memory: "1024Mi"
+ stac:
+-  enabled: true
++  enabled: {{ getenv "EOAPI_COMPONENT_STAC" }}
+   settings:
+     envVars:
+       EOAPI_STAC_EXTENSIONS: "filter,query,sort,fields,pagination,transaction"
+@@ -81,7 +97,7 @@
+       requests:
+         cpu: "512m"
+ vector:
+-  enabled: true
++  enabled: {{ getenv "EOAPI_COMPONENT_VECTOR" }} 
+   settings:
+     resources:
+       limits:
+@@ -92,3 +108,4 @@
+       # needs to on so we can call /refresh for integration tests
+       TIPG_DEBUG: "True"
+       TIPG_CATALOG_TTL: "30"

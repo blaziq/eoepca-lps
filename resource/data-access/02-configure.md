@@ -2,7 +2,9 @@ Before proceeding with the Data Acces Building Block deployment, we need first t
 
 Before we do that, the file `eoapi-maps-plugin/values-template.yaml` of the EOAPI Maps plugin must be patched because of the hardcoded 'https' scheme and TLS for ingress. This is to be removed when the `eoapi-maps-plugin/values-template.yaml` file is updated upstream.
 ```
-patch eoapi-maps-plugin/values-template.yaml /tmp/assets/eoapi-maps-plugin-values-template.patch
+patch configure-data-access.sh /tmp/assets/configure-data-access.sh.patch
+patch eoapi/values-template.yaml /tmp/assets/eoapi-values-template.yaml.patch
+patch eoapi-maps-plugin/values-template.yaml /tmp/assets/eoapi-maps-plugin-values-template.yaml.patch
 ```{{exec}}
 
 Now we can run the configuration script:
