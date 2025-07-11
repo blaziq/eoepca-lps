@@ -1,5 +1,5 @@
---- values-template.yaml.orig   2025-07-11 17:09:20.304580466 +0000
-+++ values-template.yaml        2025-07-11 17:11:22.859620773 +0000
+--- values-template.yaml.orig   2025-07-11 17:27:34.736789772 +0000
++++ values-template.yaml        2025-07-11 17:28:21.034001322 +0000
 @@ -22,9 +22,13 @@
    enabled: false
  
@@ -43,11 +43,10 @@
    image:
      tag: "1.4.0"
    settings:
-@@ -60,8 +76,8 @@
-     resources:
+@@ -61,7 +77,7 @@
        requests:
          memory: "3072Mi"
- multidim: 
+ multidim:
 -  enabled: true
 +  enabled: {{ getenv "EOAPI_COMPONENT_MULTIDIM" }}
    settings:
@@ -71,7 +70,3 @@
    settings:
      resources:
        limits:
-@@ -92,3 +108,4 @@
-       # needs to on so we can call /refresh for integration tests
-       TIPG_DEBUG: "True"
-       TIPG_CATALOG_TTL: "30"
