@@ -41,7 +41,7 @@ while read dest port types; do
     listen $port;
     location / {
       proxy_pass http://$dest;
-      proxy_set_header Host $dest:22;
+      proxy_set_header Host $dest;
       proxy_set_header Accept-Encoding "";
 EOF
   
