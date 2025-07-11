@@ -1,1 +1,0 @@
-../../../commons/assets/killercodaproxy.sh
