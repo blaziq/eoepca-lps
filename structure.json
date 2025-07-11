@@ -1,6 +1,5 @@
 {
   "items": [
-    { "path": "basic" },
     { "path": "resource" },
     { "path": "processing" }
   ]
