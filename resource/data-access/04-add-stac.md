@@ -1,5 +1,5 @@
 ```
-cd collections/sentinel-2-iceland
+pushd collections/sentinel-2-iceland
 curl -s -X POST http://eoapi.eoepca.local/stac/collections \
   -H "Content-Type: application/json" \
   -d @collections.json \
@@ -15,4 +15,5 @@ jq -c '.[]' items.json | while read -r item; do
     -H "Content-Type: application/json" \
     -d @-
 done
+popd
 ```{{exec}}
