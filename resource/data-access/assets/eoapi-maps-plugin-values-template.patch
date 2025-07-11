@@ -1,0 +1,53 @@
+--- values-template.yaml.orig   2025-07-11 12:47:07.210398572 +0000
++++ values-template.yaml        2025-07-11 12:49:19.127960149 +0000
+@@ -10,10 +10,12 @@
+       paths:
+         - path: /
+           pathType: ImplementationSpecific
++  {{- if eq ( getenv "HTTP_SCHEME" ) "https" }}
+   tls:
+   - hosts:
+       - maps.{{ getenv "INGRESS_HOST" }}
+     secretName: data-access-maps-tls
++  {{ end }}
+ resources:
+   requests:
+     memory: "256Mi"
+@@ -27,7 +29,7 @@
+     bind:
+       host: 0.0.0.0
+       port: 5000
+-    url: https://maps.{{ getenv "INGRESS_HOST" }}
++    url: {{ getenv "HTTP_SCHEME" }}://maps.{{ getenv "INGRESS_HOST" }}
+     mimetype: application/json; charset=UTF-8
+     encoding: utf-8
+     gzip: false
+@@ -102,7 +104,7 @@
+         - type: text/html
+           rel: canonical
+           title: information
+-          href: https://eoapi.{{ getenv "INGRESS_HOST" }}/
++          href: {{ getenv "HTTP_SCHEME" }}://eoapi.{{ getenv "INGRESS_HOST" }}/
+           hreflang: en-US
+       extents:
+         spatial:
+@@ -111,7 +113,7 @@
+       providers:
+         - type: map
+           name: eoapi_maps_plugin.EOAPIProvider
+-          data: https://eoapi.{{ getenv "INGRESS_HOST" }}/stac/collections/sentinel-2-l2a
++          data: {{ getenv "HTTP_SCHEME" }}://eoapi.{{ getenv "INGRESS_HOST" }}/stac/collections/sentinel-2-l2a
+           format:
+             name: png
+             mimetype: image/png
+@@ -119,8 +121,8 @@
+ sync:
+   enabled: true
+   schedule: "*/10 * * * *"
+-  eoapiUrl: "https://eoapi.{{ getenv "INGRESS_HOST" }}"
+-  pygeoapiUrl: "https://maps.{{ getenv "INGRESS_HOST" }}"
++  eoapiUrl: "{{ getenv "HTTP_SCHEME" }}://eoapi.{{ getenv "INGRESS_HOST" }}"
++  pygeoapiUrl: "{{ getenv "HTTP_SCHEME" }}://maps.{{ getenv "INGRESS_HOST" }}"
+   create: true
+   update: true
+   delete: true

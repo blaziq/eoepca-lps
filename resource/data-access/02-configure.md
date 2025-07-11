@@ -1,4 +1,11 @@
 Before proceeding with the Data Acces Building Block deployment, we need first to configure it. We can do it with the configuration script `configure-data-access.sh` provided in the EOEPCA dployment guide.
+
+Before we do that, the file `eoapi-maps-plugin/values-template.yaml` of the EOAPI Maps plugin must be patched because of the hardcoded 'https' scheme and TLS for ingress. This is to be removed when the `eoapi-maps-plugin/values-template.yaml` file is updated upstream.
+```
+patch eoapi-maps-plugin/values-template.yaml /tmp/assets/eoapi-maps-plugin-values-template.patch
+```{{exec}}
+
+Now we can run the configuration script:
 ```
 bash configure-data-access.sh
 ```{{exec}}
@@ -35,8 +42,6 @@ These changes are not configurable with the `configure-data-access.sh` script an
 ```
 source ~/.eoepca/state
 yq ea '. as $item ireduce ({}; . *+ $item )' -i eoapi/generated-values.yaml /tmp/assets/eoapi-generated-values-patch.yaml
-sed -E -i -e "s|https://(eoapi\|maps)|${HTTP_SCHEME}://\1|g" eoapi-maps-plugin/generated-values.yaml 
-yq -i "del .ingress.tls" eoapi-maps-plugin/generated-values.yaml
 ```{{exec}}
 
 Note, that this is not a solution for production environments.
