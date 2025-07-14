@@ -63,3 +63,6 @@ echo "}" >> /etc/nginx/nginx.conf
   
 # restart nginx
 systemctl restart nginx
+
+
+
