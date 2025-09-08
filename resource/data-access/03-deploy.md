@@ -32,4 +32,3 @@ helm upgrade -i eoapi-maps-plugin eoepca-dev/eoapi-maps-plugin \
 
 [Maps]({{TRAFFIC_HOST1_82}})
 
-
